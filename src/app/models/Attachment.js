@@ -46,7 +46,7 @@ class Attachment extends Model {
 
   static associate(models) {
     this.belongsTo(models.Adoption, {
-      as: 'attachment',
+      as: 'adoption',
       foreignKey: 'adoption_uid',
     });
   }

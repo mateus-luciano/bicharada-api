@@ -55,6 +55,11 @@ class Adoption extends Model {
       as: 'user',
       foreignKey: 'user_uid',
     });
+
+    this.hasMany(models.Attachment, {
+      as: 'attachments',
+      foreignKey: 'adoption_uid',
+    });
   }
 }
 
