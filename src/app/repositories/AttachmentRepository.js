@@ -10,16 +10,16 @@ class AttachmentRepository {
     return response;
   }
 
-  async find(uid) {
+  async find(attachmentUid) {
     const response = await Attachment.findOne({
       attributes: ['uid', 'url'],
-      where: { uid },
+      where: { uid: attachmentUid },
     });
 
     return response;
   }
 
-  async save(uid, file) {
+  async save(file, uid) {
     const { originalname, filename } = file;
 
     const response = await Attachment.create({
@@ -31,7 +31,7 @@ class AttachmentRepository {
     return response;
   }
 
-  async update(attachmentUid, uid, file) {
+  async update(file, uid, attachmentUid) {
     const { originalname, filename } = file;
 
     const response = await Attachment.update(
