@@ -1,4 +1,5 @@
 import User from '../models/User';
+import Adoption from '../models/Adoption';
 
 class UserRepository {
   async getAll(page, limit) {
@@ -20,12 +21,20 @@ class UserRepository {
   }
 
   async find(uid) {
-    const response = await User.findOne({
+    const data = await User.findOne({
       where: { uid },
       attributes: ['uid', 'email', 'first_name', 'last_name'],
     });
 
-    return response;
+    const adoptions = await Adoption.findOne({
+      where: { user_uid: uid },
+      attributes: ['uid', 'title', 'description', 'address', 'type'],
+    });
+
+    return {
+      data,
+      adoptions,
+    };
   }
 
   async save(body) {
