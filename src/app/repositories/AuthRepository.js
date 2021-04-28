@@ -4,7 +4,7 @@ import mailer from '../../config/mailer';
 import authConfig from '../../config/auth';
 import User from '../models/User';
 
-class AuthenticationRepository {
+class AuthRepository {
   async loginAuthentication(email) {
     const user = await User.findOne({
       where: {
@@ -83,4 +83,4 @@ class AuthenticationRepository {
   }
 }
 
-export default new AuthenticationRepository();
+export default new AuthRepository();

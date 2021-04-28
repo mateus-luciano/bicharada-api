@@ -1,11 +1,11 @@
-import AuthenticationRepository from '../repositories/AuthenticationRepository';
+import AuthRepository from '../repositories/AuthRepository';
 
 class AuthenticationController {
   async login(req, res) {
     const { email } = req.body;
 
     try {
-      const data = await AuthenticationRepository.loginAuthentication(email);
+      const data = await AuthRepository.loginAuthentication(email);
 
       return res.json(data);
     } catch (error) {
@@ -17,7 +17,7 @@ class AuthenticationController {
     const { email } = req.body;
 
     try {
-      const data = await AuthenticationRepository.forgotPassword(email);
+      const data = await AuthRepository.forgotPassword(email);
 
       return res.json(data);
     } catch (error) {
@@ -27,7 +27,7 @@ class AuthenticationController {
 
   async resetPassword(req, res) {
     try {
-      const data = await AuthenticationRepository.resetPassword(req.body);
+      const data = await AuthRepository.resetPassword(req.body);
 
       return res.json(data);
     } catch (error) {
