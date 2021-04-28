@@ -26,7 +26,7 @@ class UserRepository {
       attributes: ['uid', 'email', 'first_name', 'last_name'],
     });
 
-    const adoptions = await Adoption.findOne({
+    const adoptions = await Adoption.findAll({
       where: { user_uid: uid },
       attributes: ['uid', 'title', 'description', 'address', 'type'],
     });
