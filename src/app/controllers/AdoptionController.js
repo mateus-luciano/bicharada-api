@@ -14,10 +14,10 @@ class AdoptionController {
   }
 
   async show(req, res) {
-    const { adoptionUid } = req.params;
+    const { uid } = req.params;
 
     try {
-      const data = await AdoptionRepository.find(adoptionUid);
+      const data = await AdoptionRepository.find(uid);
 
       return res.json(data);
     } catch (error) {
@@ -38,10 +38,10 @@ class AdoptionController {
   }
 
   async update(req, res) {
-    const { adoptionUid } = req.params;
+    const { uid } = req.params;
 
     try {
-      const data = await AdoptionRepository.update(req.body, adoptionUid);
+      const data = await AdoptionRepository.update(req.body, uid);
 
       return res.json(data);
     } catch (error) {
@@ -50,10 +50,10 @@ class AdoptionController {
   }
 
   async delete(req, res) {
-    const { adoptionUid } = req.params;
+    const { uid } = req.params;
 
     try {
-      await AdoptionRepository.remove(adoptionUid);
+      await AdoptionRepository.remove(uid);
 
       return res.sendStatus(204);
     } catch (error) {
