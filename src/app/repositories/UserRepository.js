@@ -73,6 +73,7 @@ class UserRepository {
     await Adoption.destroy({
       where: { user_uid: uid },
     });
+
     await User.destroy({
       where: { uid },
     });

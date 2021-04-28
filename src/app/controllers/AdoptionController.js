@@ -26,9 +26,6 @@ class AdoptionController {
   }
 
   async store(req, res) {
-    const { uid } = req.params;
-    console.log(req.uid, 'test')
-
     try {
       const data = await AdoptionRepository.save(req.body, req.uid);
 
