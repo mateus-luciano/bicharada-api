@@ -9,12 +9,7 @@ import {
 
 const routes = new Router();
 
-routes.post(
-  '/login',
-  checkCustomerExists,
-  checkPassword,
-  AuthController.login
-);
+routes.post('/login', checkUserExists, checkPassword, AuthController.login);
 routes.post(
   '/forgot-password',
   validateData,
