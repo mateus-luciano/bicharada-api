@@ -4,7 +4,7 @@ module.exports = {
       uid: {
         type: Sequelize.DataTypes.UUID,
         allowNull: false,
-        defaultValue: Sequelize.DataTypes.UUIDV1,
+        defaultValue: Sequelize.DataTypes.UUIDV4,
         primaryKey: true,
       },
       email: {
@@ -42,14 +42,8 @@ module.exports = {
         type: Sequelize.DataTypes.STRING(100),
         allowNull: false,
       },
-      created_at: {
-        type: Sequelize.DataTypes.DATE,
-        allowNull: true,
-      },
-      updated_at: {
-        type: Sequelize.DataTypes.DATE,
-        allowNull: true,
-      },
+      created_at: { type: Sequelize.DATE, allowNull: false },
+      updated_at: { type: Sequelize.DATE, allowNull: false },
     });
   },
 
