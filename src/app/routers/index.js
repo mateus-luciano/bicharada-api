@@ -1,5 +1,6 @@
 import swagger from './swagger';
-import user from './users';
 import auth from './auth';
+import user from './users';
+import adoptions from './adoptions';
 
-export default [swagger, auth, user];
+export default [swagger, auth, user, adoptions];
