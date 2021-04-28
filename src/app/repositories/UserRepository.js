@@ -18,6 +18,19 @@ class UserRepository {
       data: response.rows,
     };
   }
+
+  async save(body) {
+    const { email, password, firstName, lastName } = body;
+
+    const response = await User.create({
+      email,
+      password,
+      first_name: firstName,
+      last_name: lastName,
+    });
+
+    return response;
+  }
 }
 
 export default new UserRepository();
