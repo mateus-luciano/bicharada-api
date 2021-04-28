@@ -15,7 +15,7 @@ module.exports = {
     camelCase: 'off',
     'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
     'prettier/prettier': 'error',
-    'jest/no-disable-tests': 'warn',
+    // 'jest/no-disable-tests': 'warn',
     'jest/no-focused-tests': 'error',
     'jest/no-identical-title': 'error',
     'jest/prefer-to-have-length': 'warn',
