@@ -16,13 +16,7 @@ routes.get(
   validateUserExists,
   UserControler.show
 );
-routes.post(
-  '/users',
-  authMiddleware,
-  checkEmail,
-  validateData,
-  UserControler.store
-);
+routes.post('/users', checkEmail, validateData, UserControler.store);
 routes.put(
   '/users/:uid',
   authMiddleware,
