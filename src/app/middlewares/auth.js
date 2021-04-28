@@ -6,7 +6,7 @@ export default async (req, res, next) => {
 
   if (!authHeader) {
     return res.status(401).json({
-      message: 'Invalid token',
+      message: 'Token não autorizado',
     });
   }
 
@@ -20,7 +20,7 @@ export default async (req, res, next) => {
     next();
   } catch (error) {
     return res.status(401).json({
-      message: 'Invalid token',
+      message: 'Token inválido',
     });
   }
 };
