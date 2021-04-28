@@ -6,7 +6,7 @@ class UserRepository {
 
     const response = await User.findAndCountAll({
       attributes: ['uid', 'email', 'first_name', 'last_name'],
-      order: [['uid', 'DESC']],
+      order: [['created_at', 'DESC']],
       limit,
       offset,
     });
