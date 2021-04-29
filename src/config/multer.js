@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import path from 'path';
 
 export default {
+  dest: path.resolve(__dirname, '..', '..', 'tmp', 'uploads'),
   storage: multer.diskStorage({
     destination: path.resolve(__dirname, '..', '..', 'tmp', 'uploads'),
     filename: (req, file, callback) => {
@@ -18,4 +19,20 @@ export default {
       });
     },
   }),
+  limits: {
+    fileSize: 2 * 1024 * 1024,
+  },
+  fileFilter: (req, file, callback) => {
+    const allowedMimes = [
+      'image/jpeg',
+      'image/pjpeg',
+      'image/png',
+      'image/gif',
+    ];
+
+    if (allowedMimes.includes(file.mimetype)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Invalid file type.'));
+  },
 };
