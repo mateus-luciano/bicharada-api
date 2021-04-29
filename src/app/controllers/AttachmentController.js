@@ -5,7 +5,7 @@ class AttachmentController {
     const { uid } = req.params;
 
     try {
-      const data = await AttachmentRepository.getAll(uid);
+      const data = await AttachmentRepository.getAll();
 
       return res.json(data);
     } catch (error) {
@@ -14,10 +14,10 @@ class AttachmentController {
   }
 
   async show(req, res) {
-    const { attachmentUid } = req.params;
+    const { uid } = req.params;
 
     try {
-      const data = await AttachmentRepository.find(attachmentUid);
+      const data = await AttachmentRepository.find(uid);
 
       return res.json(data);
     } catch (error) {
@@ -26,7 +26,7 @@ class AttachmentController {
   }
 
   async store(req, res) {
-    const { uid } = req.params;
+    const { uid } = req.query;
 
     try {
       const data = await AttachmentRepository.save(req.file, uid);
@@ -38,14 +38,10 @@ class AttachmentController {
   }
 
   async update(req, res) {
-    const { uid, attachmentUid } = req.params;
+    const { uid } = req.params;
 
     try {
-      const data = await AttachmentRepository.update(
-        req.file,
-        uid,
-        attachmentUid
-      );
+      const data = await AttachmentRepository.update(req.file, uid);
 
       return res.json(data);
     } catch (error) {
@@ -54,10 +50,10 @@ class AttachmentController {
   }
 
   async delete(req, res) {
-    const { attachmentUid } = req.params;
+    const { uid } = req.params;
 
     try {
-      await AttachmentRepository.remove(attachmentUid);
+      await AttachmentRepository.remove(uid);
 
       return res.sendStatus(204);
     } catch (error) {

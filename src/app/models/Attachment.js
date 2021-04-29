@@ -17,7 +17,7 @@ class Attachment extends Model {
         url: {
           type: Sequelize.DataTypes.VIRTUAL,
           get() {
-            return `http://localhost:3333/attachments/${this.file}`;
+            return `${process.env.URL_HTTP}/attachments/${this.file}`;
           },
         },
         name: {

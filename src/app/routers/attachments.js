@@ -7,23 +7,10 @@ const routes = new Router();
 
 const upload = multer(multerConfig);
 
-routes.get('/adoptions/:uid/attachments', AttachmentController.index);
-routes.get(
-  '/adoptions/:uid/attachments/:attachmentUid',
-  AttachmentController.show
-);
-routes.post(
-  '/adoptions/:uid/attachments',
-  upload.single('file'),
-  AttachmentController.store
-);
-routes.put(
-  '/adoptions/:uid/attachments/:attachmentUid',
-  AttachmentController.update
-);
-routes.delete(
-  '/adoptions/:uid/attachments/:attachmentUid',
-  AttachmentController.delete
-);
+routes.get('/attachments', AttachmentController.index);
+routes.get('/attachments/:uid', AttachmentController.show);
+routes.post('/attachments', upload.single('file'), AttachmentController.store);
+routes.put('/attachments/:uid', AttachmentController.update);
+routes.delete('/attachments/:uid', AttachmentController.delete);
 
 export default routes;

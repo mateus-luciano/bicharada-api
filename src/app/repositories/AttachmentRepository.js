@@ -1,19 +1,18 @@
 import Attachment from '../models/Attachment';
 
 class AttachmentRepository {
-  async getAll(uid) {
+  async getAll() {
     const response = await Attachment.findAll({
       attributes: ['uid', 'url'],
-      where: { adoption_uid: uid },
     });
 
     return response;
   }
 
-  async find(attachmentUid) {
+  async find(uid) {
     const response = await Attachment.findOne({
       attributes: ['uid', 'url'],
-      where: { uid: attachmentUid },
+      where: { uid },
     });
 
     return response;
@@ -31,7 +30,7 @@ class AttachmentRepository {
     return response;
   }
 
-  async update(file, uid, attachmentUid) {
+  async update(file, uid) {
     const { originalname, filename } = file;
 
     const response = await Attachment.update(
@@ -41,7 +40,7 @@ class AttachmentRepository {
         adoption_uid: uid,
       },
       {
-        where: { uid: attachmentUid },
+        where: { uid },
         returning: ['uid', 'url'],
       }
     );
@@ -49,9 +48,9 @@ class AttachmentRepository {
     return response[1];
   }
 
-  async remove(attachmentUid) {
+  async remove(uid) {
     await Attachment.destroy({
-      where: { uid: attachmentUid },
+      where: { uid },
     });
   }
 }
