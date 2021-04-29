@@ -20,7 +20,7 @@ class App {
     this.server.use(_cors2.default.call(void 0, ));
     this.server.use(
       '/attachments',
-      _express2.default.static(_path2.default.resolve(__dirname, '..', 'tmp', 'uploads'))
+      _express2.default.static(_path2.default.resolve(__dirname, 'tmp', 'uploads'))
     );
     _dotenv2.default.config({
       path: process.env.NODE_ENV === 'test' ? './../.env.test' : './../.env',

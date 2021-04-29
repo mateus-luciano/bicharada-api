@@ -25,7 +25,222 @@
   "produces": [
     "application/json"
   ],
-  "paths": {},
-  "definitions": {},
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "Clientes"
+        ],
+        "description": "Rota para buscar todos os clientes",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "body",
+            "description": "Nome do cliente",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "phone",
+            "in": "body",
+            "description": "Telefone do cliente",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Clientes"
+        ],
+        "description": "Rota para cadastrar um novo cliente",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "body",
+            "description": "Nome do cliente",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "phone",
+            "in": "body",
+            "description": "Telefone do cliente",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "regionId",
+            "in": "body",
+            "description": "ID da região do cliente",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/users/{uid}": {
+      "get": {
+        "tags": [
+          "Clientes"
+        ],
+        "description": "Rota para procurar e listar um cliente pelo ID",
+        "parameters": [
+          {
+            "name": "uid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do cliente",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Clientes"
+        ],
+        "description": "Rota para atualizar os dados de um cliente",
+        "parameters": [
+          {
+            "name": "uid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do cliente",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "name",
+            "in": "body",
+            "description": "Nome do cliente",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "phone",
+            "in": "body",
+            "description": "Telefone do cliente",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "regionId",
+            "in": "body",
+            "description": "ID da região do cliente",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Clientes"
+        ],
+        "description": "Rota para deletar um cliente",
+        "parameters": [
+          {
+            "name": "uid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do cliente",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "customer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "ID"
+        },
+        "name": {
+          "type": "string",
+          "example": "Nome"
+        },
+        "phone": {
+          "type": "string",
+          "example": "Telefone"
+        },
+        "region_id": {
+          "type": "string",
+          "example": "ID da região"
+        }
+      }
+    }
+  },
   "defaultModelsExpandDepth": -1
 }

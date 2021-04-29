@@ -2,6 +2,8 @@ require('dotenv').config();
 
 const host = process.env.API_URL;
 
+const customer = require('../app/documentation/customer');
+
 module.exports = {
   info: {
     version: '1.0.0',
@@ -22,6 +24,5 @@ module.exports = {
       name: 'Authorization',
     },
   },
-  definitions: {
-  },
+  definitions: { customer },
 };
