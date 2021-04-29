@@ -1,4 +1,5 @@
 import Adoption from '../models/Adoption';
+import Attachment from '../models/Attachment';
 
 class AdoptionRepository {
   async getAll(page, limit) {
@@ -20,12 +21,20 @@ class AdoptionRepository {
   }
 
   async find(uid) {
-    const response = await Adoption.findOne({
+    const data = await Adoption.findOne({
       where: { uid },
       attributes: ['uid', 'title', 'description', 'address', 'type'],
     });
 
-    return response;
+    const attachments = await Attachment.findAll({
+      attributes: ['uid', 'url'],
+      where: { adoption_uid: uid },
+    });
+
+    return {
+      data,
+      attachments,
+    };
   }
 
   async save(body, uid) {

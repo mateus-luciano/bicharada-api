@@ -2,8 +2,6 @@ import AttachmentRepository from '../repositories/AttachmentRepository';
 
 class AttachmentController {
   async index(req, res) {
-    const { uid } = req.params;
-
     try {
       const data = await AttachmentRepository.getAll();
 

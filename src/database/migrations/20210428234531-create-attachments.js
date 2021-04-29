@@ -15,6 +15,9 @@ module.exports = {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
       },
+      url: {
+        type: Sequelize.DataTypes.STRING,
+      },
       adoption_uid: {
         type: Sequelize.DataTypes.UUID,
         allowNull: false,

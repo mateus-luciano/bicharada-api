@@ -14,11 +14,14 @@ class Attachment extends Model {
           type: Sequelize.DataTypes.STRING,
           allowNull: false,
         },
-        url: {
+        generate_url: {
           type: Sequelize.DataTypes.VIRTUAL,
           get() {
             return `${process.env.URL_HTTP}/attachments/${this.file}`;
           },
+        },
+        url: {
+          type: Sequelize.DataTypes.STRING,
         },
         name: {
           type: Sequelize.DataTypes.STRING,
@@ -40,6 +43,10 @@ class Attachment extends Model {
         tableName: 'attachments',
       }
     );
+
+    this.addHook('beforeSave', (attachment) => {
+      attachment.url = attachment.generate_url;
+    });
 
     return this;
   }
