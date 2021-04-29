@@ -13,22 +13,18 @@ class Adoption extends Model {
         title: {
           type: Sequelize.DataTypes.STRING(60),
           allowNull: false,
-          unique: true,
         },
         description: {
           type: Sequelize.DataTypes.STRING(460),
           allowNull: false,
-          unique: true,
         },
         address: {
           type: Sequelize.DataTypes.STRING(160),
           allowNull: false,
-          unique: true,
         },
         type: {
           type: Sequelize.DataTypes.STRING(100),
           allowNull: false,
-          unique: true,
         },
         user_uid: {
           type: Sequelize.DataTypes.UUID,
