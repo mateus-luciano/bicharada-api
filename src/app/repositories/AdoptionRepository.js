@@ -71,6 +71,10 @@ class AdoptionRepository {
   }
 
   async remove(uid) {
+    await Attachment.destroy({
+      where: { adoption_uid: uid },
+    });
+
     await Adoption.destroy({
       where: { uid },
     });

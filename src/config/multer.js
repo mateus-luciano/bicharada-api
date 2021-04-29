@@ -20,7 +20,7 @@ export default {
     },
   }),
   limits: {
-    fileSize: 2 * 1024 * 1024,
+    fileSize: 5 * 1024 * 1024, // 5 mb
   },
   fileFilter: (req, file, callback) => {
     const allowedMimes = [
