@@ -20,7 +20,7 @@ class App {
     this.server.use(cors());
     this.server.use(
       '/attachments',
-      express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+      express.static(path.resolve(__dirname, 'tmp', 'uploads'))
     );
     dotenv.config({
       path: process.env.NODE_ENV === 'test' ? './../.env.test' : './../.env',
