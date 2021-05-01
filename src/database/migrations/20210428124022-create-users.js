@@ -34,12 +34,12 @@ module.exports = {
         allowNull: true,
         defaultValue: true,
       },
-      first_name: {
-        type: Sequelize.DataTypes.STRING(100),
+      name: {
+        type: Sequelize.DataTypes.STRING(160),
         allowNull: false,
       },
-      last_name: {
-        type: Sequelize.DataTypes.STRING(100),
+      city: {
+        type: Sequelize.DataTypes.STRING(160),
         allowNull: false,
       },
       created_at: { type: Sequelize.DATE, allowNull: false },

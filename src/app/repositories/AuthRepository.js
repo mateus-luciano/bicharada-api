@@ -12,14 +12,13 @@ class AuthRepository {
       },
     });
 
-    // eslint-disable-next-line camelcase
-    const { uid, first_name } = user;
+    const { uid, name } = user;
 
     return {
       user: {
         uid,
         email,
-        first_name,
+        name,
       },
       token: jwt.sign({ uid }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
