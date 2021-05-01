@@ -6,7 +6,7 @@ class UserRepository {
     const offset = (page - 1) * limit;
 
     const response = await User.findAndCountAll({
-      attributes: ['uid', 'email', 'name', 'city'],
+      attributes: ['uid', 'email', 'name', 'city', 'phone'],
       order: [['created_at', 'DESC']],
       limit,
       offset,
@@ -23,7 +23,7 @@ class UserRepository {
   async find(uid) {
     const data = await User.findOne({
       where: { uid },
-      attributes: ['uid', 'email', 'name', 'city'],
+      attributes: ['uid', 'email', 'name', 'city', 'phone'],
     });
 
     const adoptions = await Adoption.findAll({
@@ -38,20 +38,21 @@ class UserRepository {
   }
 
   async save(body) {
-    const { email, password, name, city } = body;
+    const { email, password, name, city, phone } = body;
 
     const response = await User.create({
       email,
       password,
       name,
       city,
+      phone,
     });
 
     return response;
   }
 
   async update(body, uid) {
-    const { email, password, name, city } = body;
+    const { email, password, name, city, phone } = body;
 
     const response = await User.update(
       {
@@ -59,10 +60,11 @@ class UserRepository {
         password,
         name,
         city,
+        phone,
       },
       {
         where: { uid },
-        returning: ['uid', 'email', 'name', 'city'],
+        returning: ['uid', 'email', 'name', 'city', 'phone'],
       }
     );
 

@@ -49,6 +49,10 @@ class User extends Model {
           type: Sequelize.DataTypes.STRING(160),
           allowNull: false,
         },
+        phone: {
+          type: Sequelize.DataTypes.STRING,
+          allowNull: false,
+        },
       },
       {
         sequelize,

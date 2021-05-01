@@ -1,9 +1,9 @@
 import User from '../models/User';
 
 function validateData(req, res, next) {
-  const { email, password, name, city } = req.body;
+  const { email, password, name, city, phone } = req.body;
 
-  if (!email || !password || !name || !city) {
+  if (!email || !password || !name || !city || !phone) {
     return res.status(400).json({
       message: 'Dados inválidos',
     });
