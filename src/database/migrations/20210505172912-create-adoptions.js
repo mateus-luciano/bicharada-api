@@ -7,6 +7,11 @@ module.exports = {
         defaultValue: Sequelize.DataTypes.UUIDV4,
         primaryKey: true,
       },
+      status: {
+        type: Sequelize.DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: true,
+      },
       title: {
         type: Sequelize.DataTypes.STRING(60),
         allowNull: false,

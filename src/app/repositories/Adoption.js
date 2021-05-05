@@ -4,7 +4,7 @@ import Attachment from '../models/Attachment';
 class AdoptionRepository {
   async getAll(limit, page) {
     const response = await Adoption.findAndCountAll({
-      attributes: ['uid', 'title', 'description', 'address', 'type'],
+      attributes: ['uid', 'title', 'description', 'address', 'type', 'status'],
       order: [['created_at', 'DESC']],
       limit,
       offset: limit * (page - 1),
@@ -21,7 +21,7 @@ class AdoptionRepository {
   async find(uid) {
     const response = await Adoption.findOne({
       where: { uid },
-      attributes: ['uid', 'title', 'description', 'address', 'type'],
+      attributes: ['uid', 'title', 'description', 'address', 'type', 'status'],
     });
 
     const attachments = await Attachment.findAll({
