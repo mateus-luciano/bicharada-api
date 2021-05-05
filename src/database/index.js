@@ -3,9 +3,9 @@ import databaseConfig from '../config/database';
 
 import User from '../app/models/User';
 import Adoption from '../app/models/Adoption';
-import Attachment from '../app/models/Attachment';
+import Attachemt from '../app/models/Attachment';
 
-const models = [User, Adoption, Attachment];
+const models = [User, Adoption, Attachemt];
 
 class Database {
   constructor() {
@@ -13,7 +13,15 @@ class Database {
   }
 
   init() {
-    this.connection = new Sequelize(databaseConfig);
+    if (process.env.NODE_ENV === 'test') {
+      this.connection = new Sequelize({
+        dialect: databaseConfig.dialect,
+        storage: databaseConfig.storage,
+        define: databaseConfig.define,
+      });
+    } else {
+      this.connection = new Sequelize(databaseConfig);
+    }
 
     models
       .map((model) => model.init(this.connection))
