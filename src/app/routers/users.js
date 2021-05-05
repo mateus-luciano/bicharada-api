@@ -32,8 +32,7 @@ routes.get(
 );
 routes.get(
   '/users/:uid',
-  authMiddleware,
-  validateUserExists,
+  [authMiddleware, validateUserExists],
   UserControler.show
   /*
   #swagger.tags = ['Usuários']
@@ -57,8 +56,7 @@ routes.get(
 );
 routes.post(
   '/users',
-  checkEmail,
-  validateData,
+  [validateData, checkEmail],
   UserControler.store
   /*
   #swagger.tags = ['Usuários']
@@ -82,9 +80,7 @@ routes.post(
 );
 routes.put(
   '/users/:uid',
-  authMiddleware,
-  validateUserExists,
-  validateData,
+  [authMiddleware, validateUserExists, validateData],
   UserControler.update
   /*
   #swagger.tags = ['Usuários']
@@ -122,8 +118,7 @@ routes.put(
 );
 routes.delete(
   '/users/:uid',
-  authMiddleware,
-  validateUserExists,
+  [authMiddleware, validateUserExists],
   UserControler.delete
   /*
   #swagger.tags = ['Usuários']

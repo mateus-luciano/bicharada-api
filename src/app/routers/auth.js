@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import AuthController from '../controllers/AuthController';
-import { checkUserExists, checkPassword } from '../middlewares/authLogin';
+import { checkUserExists, checkPassword } from '../middlewares/login';
 import {
   validateData,
   validateDataToken,
