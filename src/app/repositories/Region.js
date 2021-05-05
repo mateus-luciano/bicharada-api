@@ -1,4 +1,4 @@
-import Region from '../models/Region'
+import Region from '../models/Region';
 
 class RegionRepository {
   async getAll() {
