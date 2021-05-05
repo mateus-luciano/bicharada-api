@@ -12,14 +12,14 @@ module.exports = {
   rules: {
     'class-methods-use-this': 'off',
     'no-param-reassign': 'off',
-    'consistent-return': 'off',
     camelCase: 'off',
     'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
     'prettier/prettier': 'error',
+    'consistent-return': 'off',
+    'jest/valid-expect': 'error',
     // 'jest/no-disable-tests': 'warn',
     'jest/no-focused-tests': 'error',
     'jest/no-identical-title': 'error',
     'jest/prefer-to-have-length': 'warn',
-    'jest/valid-expect': 'error',
   },
 };
