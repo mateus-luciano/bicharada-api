@@ -2,7 +2,7 @@
 
 const host = process.env.API_URL;
 
-const customer = require('../app/documentation/customer');
+const { User, UserStore, UserUpdate } = require('../app/documentation/user');
 
 module.exports = {
   info: {
@@ -24,5 +24,9 @@ module.exports = {
       name: 'Authorization',
     },
   },
-  definitions: { customer },
+  definitions: {
+    UserList: [User],
+    UserStore,
+    UserUpdate,
+  },
 };

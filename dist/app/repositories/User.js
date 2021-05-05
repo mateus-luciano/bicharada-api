@@ -2,14 +2,12 @@
 var _Adoption = require('../models/Adoption'); var _Adoption2 = _interopRequireDefault(_Adoption);
 
 class UserRepository {
-  async getAll(page, limit) {
-    const offset = (page - 1) * limit;
-
+  async getAll(limit, page) {
     const response = await _User2.default.findAndCountAll({
       attributes: ['uid', 'email', 'name', 'city', 'phone'],
       order: [['created_at', 'DESC']],
       limit,
-      offset,
+      offset: limit * (page - 1),
     });
 
     return {
@@ -21,7 +19,7 @@ class UserRepository {
   }
 
   async find(uid) {
-    const data = await _User2.default.findOne({
+    const response = await _User2.default.findOne({
       where: { uid },
       attributes: ['uid', 'email', 'name', 'city', 'phone'],
     });
@@ -32,14 +30,12 @@ class UserRepository {
     });
 
     return {
-      data,
+      data: response.data,
       adoptions,
     };
   }
 
-  async save(body) {
-    const { email, password, name, city, phone } = body;
-
+  async save(email, password, name, city, phone) {
     const response = await _User2.default.create({
       email,
       password,
@@ -51,9 +47,7 @@ class UserRepository {
     return response;
   }
 
-  async update(body, uid) {
-    const { email, password, name, city, phone } = body;
-
+  async update(email, password, name, city, phone, uid) {
     const response = await _User2.default.update(
       {
         email,

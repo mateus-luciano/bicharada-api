@@ -13,7 +13,15 @@ class Database {
   }
 
   init() {
-    this.connection = new (0, _sequelize2.default)(_database2.default);
+    if (process.env.NODE_ENV === 'test') {
+      this.connection = new (0, _sequelize2.default)({
+        dialect: _database2.default.dialect,
+        storage: _database2.default.storage,
+        define: _database2.default.define,
+      });
+    } else {
+      this.connection = new (0, _sequelize2.default)(_database2.default);
+    }
 
     models
       .map((model) => model.init(this.connection))

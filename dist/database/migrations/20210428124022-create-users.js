@@ -34,12 +34,16 @@
         allowNull: true,
         defaultValue: true,
       },
-      first_name: {
-        type: Sequelize.DataTypes.STRING(100),
+      name: {
+        type: Sequelize.DataTypes.STRING(160),
         allowNull: false,
       },
-      last_name: {
-        type: Sequelize.DataTypes.STRING(100),
+      city: {
+        type: Sequelize.DataTypes.STRING(160),
+        allowNull: false,
+      },
+      phone: {
+        type: Sequelize.DataTypes.STRING,
         allowNull: false,
       },
       created_at: { type: Sequelize.DATE, allowNull: false },

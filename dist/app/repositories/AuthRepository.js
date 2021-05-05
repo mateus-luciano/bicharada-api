@@ -12,14 +12,13 @@ class AuthRepository {
       },
     });
 
-    // eslint-disable-next-line camelcase
-    const { uid, first_name } = user;
+    const { uid, name } = user;
 
     return {
       user: {
         uid,
         email,
-        first_name,
+        name,
       },
       token: _jsonwebtoken2.default.sign({ uid }, _auth2.default.secret, {
         expiresIn: _auth2.default.expiresIn,
@@ -58,7 +57,7 @@ class AuthRepository {
         from: 'teeusdm@gmail.com',
         html: `<p>Voce esqueceu sua senha? utilize o token { ${token} }, para recuperar.</p>`,
       },
-      (error) => {
+      error => {
         if (error) {
           return { error: 'Não foi possivel enviar o email de recuperação' };
         }

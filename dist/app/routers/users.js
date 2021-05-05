@@ -14,25 +14,19 @@ routes.get(
   _auth2.default,
   _UserController2.default.index
   /*
-  #swagger.tags = ['Clientes']
-  #swagger.description = 'Rota para buscar todos os clientes'
-
-    #swagger.parameters['name'] = {
-      in: 'body',
-      description: 'Nome do cliente',
-      required: false,
-      type: 'string'
+  #swagger.tags = ['Usuários']
+  #swagger.description = 'Endpoint para buscar todos os usuários'
+  #swagger.security = [{Bearer: []}]
+  #swagger.response[200] = {
+    description: 'Lista de usuários',
+    schema: {
+      $ref: "#definitions/UserList"
     }
-    #swagger.parameters['phone'] = {
-      in: 'body',
-      description: 'Telefone do cliente',
-      required: false,
-      type: 'integer'
-    }
-
-    #swagger.response[200] = {
-      description: 'Clientes listados',
-      schema: { $ref: "#/definitions/customer" }
+  }
+    #swagger.responses[400] = {
+      schema: {
+        message: 'BAD_REQUEST'
+      }
     }
   */
 );
@@ -42,19 +36,22 @@ routes.get(
   _user.validateUserExists,
   _UserController2.default.show
   /*
-  #swagger.tags = ['Clientes']
-  #swagger.description = 'Rota para procurar e listar um cliente pelo ID'
-
-    #swagger.parameters['id'] = {
-      in: 'path',
-      description: 'ID do cliente',
-      required: true,
-      type: 'integer'
-    }
-
-    #swagger.response[200] = {
-      description: 'Cliente listado',
-      schema: { $ref: "#/definitions/customer" }
+  #swagger.tags = ['Usuários']
+  #swagger.description = 'Endpoint para buscar um usuário'
+  #swagger.security = [{Bearer: []}]
+  #swagger.parameters['uid'] = {
+    in: 'path',
+    description: 'UID do usuário',
+    required: true,
+    type: 'UUID',
+    schema: {
+      "$ref": "#definitions/UserList"
+    },
+  }
+    #swagger.responses[404] = {
+      schema: {
+        message: 'NOT_FOUND'
+      }
     }
   */
 );
@@ -64,31 +61,22 @@ routes.post(
   _user.validateData,
   _UserController2.default.store
   /*
-  #swagger.tags = ['Clientes']
-  #swagger.description = 'Rota para cadastrar um novo cliente'
-
-    #swagger.parameters['name'] = {
-      in: 'body',
-      description: 'Nome do cliente',
-      required: true,
-      type: 'string'
+  #swagger.tags = ['Usuários']
+  #swagger.description = 'Endpoint para cadastrar um usuário'
+  #swagger.security = [{Bearer: []}]
+  #swagger.parameters['Users'] = {
+    in: 'body',
+    description: 'Cadastrar novo usuário',
+    required: true,
+    type: 'string',
+    schema: {
+      $ref: "#definitions/UserStore"
     }
-    #swagger.parameters['phone'] = {
-      in: 'body',
-      description: 'Telefone do cliente',
-      required: true,
-      type: 'integer'
-    }
-    #swagger.parameters['regionId'] = {
-      in: 'body',
-      description: 'ID da região do cliente',
-      required: true,
-      type: 'integer'
-    }
-
-    #swagger.response[201] = {
-      description: 'Cliente cadastrado',
-      schema: { $ref: "#/definitions/customer" }
+  }
+    #swagger.responses[400] = {
+      schema: {
+        message: 'BAD_REQUEST'
+      }
     }
   */
 );
@@ -99,38 +87,37 @@ routes.put(
   _user.validateData,
   _UserController2.default.update
   /*
-  #swagger.tags = ['Clientes']
-  #swagger.description = 'Rota para atualizar os dados de um cliente'
-
-    #swagger.parameters['id'] = {
-      in: 'path',
-      description: 'ID do cliente',
-      required: true,
-      type: 'integer'
+  #swagger.tags = ['Usuários']
+  #swagger.description = 'Endpoint para atualizar uma categotia'
+  #swagger.security = [{Bearer: []}]
+  #swagger.parameters['uid'] = {
+    in: 'path',
+    description: 'UID do usuário',
+    required: true,
+    type: 'UUID',
+  }
+  #swagger.parameters['name'] = {
+    in: 'body',
+    description: 'Nome da categoria',
+    required: true,
+    type: 'string'
     }
-    #swagger.parameters['name'] = {
-      in: 'body',
-      description: 'Nome do cliente',
-      required: true,
-      type: 'string'
+  #swagger.response[200] = {
+    description: 'Categoria atualizada com sucesso',
+    schema: {
+      $ref: "#definitions/UserUpdate"
     }
-    #swagger.parameters['phone'] = {
-      in: 'body',
-      description: 'Telefone do cliente',
-      required: true,
-      type: 'integer'
+  }
+  #swagger.responses[400] = {
+    schema: {
+      message: 'BAD_REQUEST'
     }
-    #swagger.parameters['regionId'] = {
-      in: 'body',
-      description: 'ID da região do cliente',
-      required: true,
-      type: 'integer'
+  }
+  #swagger.responses[404] = {
+    schema: {
+      message: 'NOT_FOUND'
     }
-
-    #swagger.response[200] = {
-      description: 'Cliente atualizado com sucesso',
-      schema: { $ref: "#/definitions/customer" }
-    }
+  }
   */
 );
 routes.delete(
@@ -139,19 +126,30 @@ routes.delete(
   _user.validateUserExists,
   _UserController2.default.delete
   /*
-  #swagger.tags = ['Clientes']
-  #swagger.description = 'Rota para deletar um cliente'
-
-    #swagger.parameters['id'] = {
-      in: 'path',
-      description: 'ID do cliente',
-      required: true,
-      type: 'integer'
+  #swagger.tags = ['Usuários']
+  #swagger.description = 'Endpoint para deletar uma categotia'
+  #swagger.security = [{Bearer: []}]
+  #swagger.parameters['uid'] = {
+    in: 'path',
+    description: 'ID da categoria',
+    required: true,
+    type: 'UUID',
+  } 
+  #swagger.response[204] = {
+    description: 'Categoria deletada com sucesso',
+    schema: {
+      $ref: "#/definitions/User"
     }
-
-    #swagger.response[204] = {
-      description: 'Cliente deletado com sucesso',
-      schema: { $ref: "#/definitions/customer" }
+  }
+    #swagger.responses[400] = {
+      schema: {
+        message: 'BAD_REQUEST'
+      }
+    }
+    #swagger.responses[404] = {
+      schema: {
+        message: 'NOT_FOUND'
+      }
     }
   */
 );

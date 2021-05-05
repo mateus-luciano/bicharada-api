@@ -1,12 +1,18 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _User = require('../models/User'); var _User2 = _interopRequireDefault(_User);
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _httperrors = require('http-errors'); var _httperrors2 = _interopRequireDefault(_httperrors);
+
+var _User = require('../models/User'); var _User2 = _interopRequireDefault(_User);
+
+var _http = require('../constants/http'); var _http2 = _interopRequireDefault(_http);
+var _resetPassword = require('../constants/resetPassword'); var _resetPassword2 = _interopRequireDefault(_resetPassword);
 
 function validateData(req, res, next) {
   const { email } = req.body;
 
   if (!email) {
-    return res.status(400).json({
-      message: 'E-mail não oferecido',
-    });
+    throw _httperrors2.default.call(void 0, 
+      _http2.default.BadRequest,
+      _resetPassword2.default.InvalidEmail
+    );
   }
 
   next();
@@ -16,9 +22,10 @@ function validateDataToken(req, res, next) {
   const { email, password, token } = req.body;
 
   if (!email || !password || !token) {
-    return res.status(400).json({
-      message: 'Dados inválidos',
-    });
+    throw _httperrors2.default.call(void 0, 
+      _http2.default.BadRequest,
+      _resetPassword2.default.InvalidData
+    );
   }
 
   next();
@@ -34,11 +41,17 @@ async function validateToken(req, res, next) {
   });
 
   if (token !== user.password_reset_token) {
-    return res.status(401).json({ error: 'Token inválido' });
+    throw _httperrors2.default.call(void 0, 
+      _http2.default.Unauthorized,
+      _resetPassword2.default.InvalidToken
+    );
   }
 
   if (now > user.password_reset_expires) {
-    return res.status(400).json({ error: 'Token expirou, gere um novo' });
+    throw _httperrors2.default.call(void 0, 
+      _http2.default.Unauthorized,
+      _resetPassword2.default.ExpiredToken
+    );
   }
 
   next();

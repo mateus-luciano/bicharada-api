@@ -1,12 +1,15 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _User = require('../models/User'); var _User2 = _interopRequireDefault(_User);
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _httperrors = require('http-errors'); var _httperrors2 = _interopRequireDefault(_httperrors);
+
+var _User = require('../models/User'); var _User2 = _interopRequireDefault(_User);
+
+var _http = require('../constants/http'); var _http2 = _interopRequireDefault(_http);
+var _user = require('../constants/user'); var _user2 = _interopRequireDefault(_user);
 
 function validateData(req, res, next) {
-  const { email, password, firstName, lastName } = req.body;
+  const { email, password, name, city, phone } = req.body;
 
-  if (!email || !password || !firstName || !lastName) {
-    return res.status(400).json({
-      message: 'Dados inválidos',
-    });
+  if (!email || !password || !name || !city || !phone) {
+    throw _httperrors2.default.call(void 0, _http2.default.BadRequest, _user2.default.InvalidData);
   }
 
   next();
@@ -20,9 +23,7 @@ async function checkEmail(req, res, next) {
   });
 
   if (user) {
-    return res.status(409).json({
-      message: 'E-mail já registrado.',
-    });
+    throw _httperrors2.default.call(void 0, _http2.default.Conflict, _user2.default.InvalidEmail);
   }
 
   next();
@@ -36,9 +37,7 @@ async function validateUserExists(req, res, next) {
   });
 
   if (!user) {
-    return res.status(404).json({
-      message: 'Não encontrado',
-    });
+    throw _httperrors2.default.call(void 0, _http2.default.NotFound, _user2.default.UserNotFound);
   }
 
   next();

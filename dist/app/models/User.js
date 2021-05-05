@@ -41,12 +41,16 @@ class User extends _sequelize.Model {
           allowNull: true,
           defaultValue: true,
         },
-        first_name: {
-          type: _sequelize2.default.DataTypes.STRING(100),
+        name: {
+          type: _sequelize2.default.DataTypes.STRING(160),
           allowNull: false,
         },
-        last_name: {
-          type: _sequelize2.default.DataTypes.STRING(100),
+        city: {
+          type: _sequelize2.default.DataTypes.STRING(160),
+          allowNull: false,
+        },
+        phone: {
+          type: _sequelize2.default.DataTypes.STRING,
           allowNull: false,
         },
       },

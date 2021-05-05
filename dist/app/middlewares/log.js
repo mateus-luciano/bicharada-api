@@ -1,6 +1,7 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});exports. default = (req, res, next) => {
-  const { method, url, params, query, ip } = req;
-  console.log(method, url, params, query, ip);
+  const { method, url, params, query, body, ip } = req;
+  // eslint-disable-next-line no-console
+  console.log(method, url, params, query, body, ip);
 
   next();
 };
