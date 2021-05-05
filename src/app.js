@@ -10,12 +10,13 @@ import './database';
 class App {
   constructor() {
     this.server = express();
-    this.configs();
+    this.config();
     this.middlewares();
     this.routers();
+    this.errorHandler();
   }
 
-  configs() {
+  config() {
     this.server.use(express.json());
     this.server.use(express.urlencoded({ extended: false }));
     this.server.use(cors());
@@ -35,6 +36,14 @@ class App {
 
   routers() {
     this.server.use(routers);
+  }
+
+  errorHandler() {
+    this.server.use((error, req, res, next) =>
+      res.status(error.status).json({
+        message: error.message,
+      })
+    );
   }
 }
 
