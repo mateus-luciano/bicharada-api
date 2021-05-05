@@ -36,6 +36,16 @@ class Adoption extends Model {
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE',
         },
+        region_uid: {
+          type: Sequelize.DataTypes.UUID,
+          allowNull: false,
+          references: {
+            model: 'regions',
+            key: 'uid',
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE',
+        },
       },
       {
         sequelize,
@@ -51,10 +61,13 @@ class Adoption extends Model {
       as: 'user',
       foreignKey: 'user_uid',
     });
-
     this.hasMany(models.Attachment, {
       as: 'attachments',
       foreignKey: 'adoption_uid',
+    });
+    this.belongsTo(models.Region, {
+      as: 'region',
+      foreignKey: 'region_uid',
     });
   }
 }
