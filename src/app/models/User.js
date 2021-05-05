@@ -53,6 +53,16 @@ class User extends Model {
           type: Sequelize.DataTypes.STRING,
           allowNull: false,
         },
+        region_uid: {
+          type: Sequelize.DataTypes.UUID,
+          allowNull: false,
+          references: {
+            model: 'regions',
+            key: 'uid',
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE',
+        },
       },
       {
         sequelize,
@@ -78,6 +88,10 @@ class User extends Model {
     this.hasMany(models.Adoption, {
       as: 'adoption',
       foreignKey: 'user_uid',
+    });
+    this.belongsTo(models.Region, {
+      as: 'region',
+      foreignKey: 'region_uid',
     });
   }
 }
