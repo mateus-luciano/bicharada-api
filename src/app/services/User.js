@@ -22,14 +22,29 @@ class UserService {
     return data;
   }
 
-  async save(email, password, name, city, phone) {
-    const data = UserRepository.save(email, password, name, city, phone);
+  async save(email, password, name, city, phone, region) {
+    const data = UserRepository.save(
+      email,
+      password,
+      name,
+      city,
+      phone,
+      region
+    );
 
     return data;
   }
 
-  async update(email, password, name, city, phone, uid) {
-    const data = UserRepository.update(email, password, name, city, phone, uid);
+  async update(email, password, name, city, phone, region, uid) {
+    const data = UserRepository.update(
+      email,
+      password,
+      name,
+      city,
+      phone,
+      region,
+      uid
+    );
 
     return data;
   }

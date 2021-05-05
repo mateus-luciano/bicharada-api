@@ -28,10 +28,17 @@ class UserController {
   }
 
   async store(req, res) {
-    const { email, password, name, city, phone } = req.body;
+    const { email, password, name, city, phone, region } = req.body;
 
     try {
-      const data = await UserService.save(email, password, name, city, phone);
+      const data = await UserService.save(
+        email,
+        password,
+        name,
+        city,
+        phone,
+        region
+      );
 
       return res.status(HttpConstants.Created).json(data);
     } catch (error) {
@@ -41,7 +48,7 @@ class UserController {
 
   async update(req, res) {
     const { uid } = req.params;
-    const { email, password, name, city, phone } = req.body;
+    const { email, password, name, city, phone, region } = req.body;
 
     try {
       const data = await UserService.update(
@@ -50,6 +57,7 @@ class UserController {
         name,
         city,
         phone,
+        region,
         uid
       );
 

@@ -35,19 +35,20 @@ class UserRepository {
     };
   }
 
-  async save(email, password, name, city, phone) {
+  async save(email, password, name, city, phone, region) {
     const response = await User.create({
       email,
       password,
       name,
       city,
       phone,
+      region_uid: region,
     });
 
     return response;
   }
 
-  async update(email, password, name, city, phone, uid) {
+  async update(email, password, name, city, phone, region, uid) {
     const response = await User.update(
       {
         email,
@@ -55,6 +56,7 @@ class UserRepository {
         name,
         city,
         phone,
+        region_uid: region,
       },
       {
         where: { uid },
