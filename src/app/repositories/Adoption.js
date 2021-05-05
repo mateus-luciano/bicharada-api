@@ -35,25 +35,27 @@ class AdoptionRepository {
     };
   }
 
-  async save(title, description, address, type, uid) {
+  async save(title, description, address, type, region, uid) {
     const response = await Adoption.create({
       title,
       description,
       address,
       type,
       user_uid: uid,
+      region_uid: region,
     });
 
     return response;
   }
 
-  async update(title, description, address, type, uid) {
+  async update(title, description, address, type, region, uid) {
     const response = await Adoption.update(
       {
         title,
         description,
         address,
         type,
+        region_uid: region,
       },
       {
         where: { uid },
