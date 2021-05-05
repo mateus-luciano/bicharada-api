@@ -28,7 +28,7 @@ class AdoptionController {
   }
 
   async store(req, res) {
-    const { title, description, address, type } = req.body;
+    const { title, description, address, type, region } = req.body;
 
     try {
       const data = await AdoptionService.save(
@@ -36,6 +36,7 @@ class AdoptionController {
         description,
         address,
         type,
+        region,
         req.uid
       );
 
@@ -47,7 +48,7 @@ class AdoptionController {
 
   async update(req, res) {
     const { uid } = req.params;
-    const { title, description, address, type } = req.body;
+    const { title, description, address, type, region } = req.body;
 
     try {
       const data = await AdoptionService.update(
@@ -55,6 +56,7 @@ class AdoptionController {
         description,
         address,
         type,
+        region,
         uid
       );
 
