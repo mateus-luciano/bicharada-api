@@ -25,219 +25,83 @@
   "produces": [
     "application/json"
   ],
-  "paths": {
-    "/users": {
-      "get": {
-        "tags": [
-          "Clientes"
-        ],
-        "description": "Rota para buscar todos os clientes",
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "type": "string"
+  "paths": {},
+  "definitions": {
+    "UserList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uid": {
+            "type": "string",
+            "example": "17a3ef3a-2c78-446e-a7eb-71c65adca270"
           },
-          {
-            "name": "limit",
-            "in": "query",
-            "type": "string"
+          "email": {
+            "type": "string",
+            "example": "mateus@example.com"
           },
-          {
-            "name": "name",
-            "in": "body",
-            "description": "Nome do cliente",
-            "required": false,
-            "type": "string"
+          "name": {
+            "type": "string",
+            "example": "Mateus Luciano da Silva"
           },
-          {
-            "name": "phone",
-            "in": "body",
-            "description": "Telefone do cliente",
-            "required": false,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Clientes"
-        ],
-        "description": "Rota para cadastrar um novo cliente",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "body",
-            "description": "Nome do cliente",
-            "required": true,
-            "type": "string"
+          "city": {
+            "type": "string",
+            "example": "Parobé"
           },
-          {
-            "name": "phone",
-            "in": "body",
-            "description": "Telefone do cliente",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "regionId",
-            "in": "body",
-            "description": "ID da região do cliente",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "409": {
-            "description": "Conflict"
+          "phone": {
+            "type": "string",
+            "example": "45 991434191"
           }
         }
       }
     },
-    "/users/{uid}": {
-      "get": {
-        "tags": [
-          "Clientes"
-        ],
-        "description": "Rota para procurar e listar um cliente pelo ID",
-        "parameters": [
-          {
-            "name": "uid",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID do cliente",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Clientes"
-        ],
-        "description": "Rota para atualizar os dados de um cliente",
-        "parameters": [
-          {
-            "name": "uid",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID do cliente",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "name",
-            "in": "body",
-            "description": "Nome do cliente",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "phone",
-            "in": "body",
-            "description": "Telefone do cliente",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "regionId",
-            "in": "body",
-            "description": "ID da região do cliente",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Clientes"
-        ],
-        "description": "Rota para deletar um cliente",
-        "parameters": [
-          {
-            "name": "uid",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID do cliente",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "customer": {
+    "UserStore": {
       "type": "object",
       "properties": {
-        "id": {
+        "email": {
           "type": "string",
-          "example": "ID"
+          "example": "mateus@example.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "mateus123"
         },
         "name": {
           "type": "string",
-          "example": "Nome"
+          "example": "Mateus Luciano da Silva"
+        },
+        "city": {
+          "type": "string",
+          "example": "Parobé"
         },
         "phone": {
           "type": "string",
-          "example": "Telefone"
-        },
-        "region_id": {
+          "example": "45 991434191"
+        }
+      }
+    },
+    "UserUpdate": {
+      "type": "object",
+      "properties": {
+        "email": {
           "type": "string",
-          "example": "ID da região"
+          "example": "mateus@example.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "mateus123"
+        },
+        "name": {
+          "type": "string",
+          "example": "Mateus Luciano da Silva"
+        },
+        "city": {
+          "type": "string",
+          "example": "Novo Hamburgo"
+        },
+        "phone": {
+          "type": "string",
+          "example": "45 999999999"
         }
       }
     }
