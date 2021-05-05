@@ -1,13 +1,19 @@
 import jwt from 'jsonwebtoken';
+import createError from 'http-errors';
+
 import authConfig from '../../config/auth';
+
+import HttpConstants from '../constants/http';
+import AuthConstants from '../constants/auth';
 
 export default async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    return res.status(401).json({
-      message: 'Token não autorizado',
-    });
+    throw createError(
+      HttpConstants.Unauthorized,
+      AuthConstants.TokenUnauthorized
+    );
   }
 
   const [, token] = authHeader.split(' ');
@@ -19,8 +25,6 @@ export default async (req, res, next) => {
 
     next();
   } catch (error) {
-    return res.status(401).json({
-      message: 'Token inválido',
-    });
+    throw createError(HttpConstants.Unauthorized, AuthConstants.TokenInvalid);
   }
 };

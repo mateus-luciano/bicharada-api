@@ -1,12 +1,18 @@
+import createError from 'http-errors';
+
 import User from '../models/User';
+
+import HttpConstants from '../constants/http';
+import ResetPasswordConstants from '../constants/resetPassword';
 
 function validateData(req, res, next) {
   const { email } = req.body;
 
   if (!email) {
-    return res.status(400).json({
-      message: 'E-mail não oferecido',
-    });
+    throw createError(
+      HttpConstants.BadRequest,
+      ResetPasswordConstants.InvalidEmail
+    );
   }
 
   next();
@@ -16,9 +22,10 @@ function validateDataToken(req, res, next) {
   const { email, password, token } = req.body;
 
   if (!email || !password || !token) {
-    return res.status(400).json({
-      message: 'Dados inválidos',
-    });
+    throw createError(
+      HttpConstants.BadRequest,
+      ResetPasswordConstants.InvalidData
+    );
   }
 
   next();
@@ -34,11 +41,17 @@ async function validateToken(req, res, next) {
   });
 
   if (token !== user.password_reset_token) {
-    return res.status(401).json({ error: 'Token inválido' });
+    throw createError(
+      HttpConstants.Unauthorized,
+      ResetPasswordConstants.InvalidToken
+    );
   }
 
   if (now > user.password_reset_expires) {
-    return res.status(400).json({ error: 'Token expirou, gere um novo' });
+    throw createError(
+      HttpConstants.Unauthorized,
+      ResetPasswordConstants.ExpiredToken
+    );
   }
 
   next();

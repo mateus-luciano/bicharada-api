@@ -57,7 +57,7 @@ class AuthRepository {
         from: 'teeusdm@gmail.com',
         html: `<p>Voce esqueceu sua senha? utilize o token { ${token} }, para recuperar.</p>`,
       },
-      (error) => {
+      error => {
         if (error) {
           return { error: 'Não foi possivel enviar o email de recuperação' };
         }

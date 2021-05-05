@@ -1,15 +1,17 @@
-import AdoptionRepository from '../repositories/AdoptionRepository';
+import AdoptionService from '../services/Adoption';
+
+import HttpConstants from '../constants/http';
 
 class AdoptionController {
   async index(req, res) {
-    const { page, limit } = req.query;
+    const { limit, page } = req.query;
 
     try {
-      const data = await AdoptionRepository.getAll(page ?? 1, limit ?? 10);
+      const data = await AdoptionService.getAll(limit ?? 10, page ?? 1);
 
       return res.json(data);
     } catch (error) {
-      return res.status(error.status || 400).json(error);
+      return res.status(error.status || HttpConstants.BadRequest).json(error);
     }
   }
 
@@ -17,33 +19,48 @@ class AdoptionController {
     const { uid } = req.params;
 
     try {
-      const data = await AdoptionRepository.find(uid);
+      const data = await AdoptionService.find(uid);
 
       return res.json(data);
     } catch (error) {
-      return res.status(error.status || 400).json(error);
+      return res.status(error.status || HttpConstants.BadRequest).json(error);
     }
   }
 
   async store(req, res) {
-    try {
-      const data = await AdoptionRepository.save(req.body, req.uid);
+    const { title, description, address, type } = req.body;
 
-      return res.status(201).json(data);
+    try {
+      const data = await AdoptionService.save(
+        title,
+        description,
+        address,
+        type,
+        req.uid
+      );
+
+      return res.status(HttpConstants.Created).json(data);
     } catch (error) {
-      return res.status(error.status || 400).json(error);
+      return res.status(error.status || HttpConstants.BadRequest).json(error);
     }
   }
 
   async update(req, res) {
     const { uid } = req.params;
+    const { title, description, address, type } = req.body;
 
     try {
-      const data = await AdoptionRepository.update(req.body, uid);
+      const data = await AdoptionService.update(
+        title,
+        description,
+        address,
+        type,
+        uid
+      );
 
       return res.json(data);
     } catch (error) {
-      return res.status(error.status || 400).json(error);
+      return res.status(error.status || HttpConstants.BadRequest).json(error);
     }
   }
 
@@ -51,11 +68,11 @@ class AdoptionController {
     const { uid } = req.params;
 
     try {
-      await AdoptionRepository.remove(uid);
+      await AdoptionService.remove(uid);
 
-      return res.sendStatus(204);
+      return res.sendStatus(HttpConstants.NoContent);
     } catch (error) {
-      return res.status(error.status || 400).json(error);
+      return res.status(error.status || HttpConstants.BadRequest).json(error);
     }
   }
 }

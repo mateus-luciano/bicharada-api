@@ -1,12 +1,15 @@
+import createError from 'http-errors';
+
 import Adoption from '../models/Adoption';
+
+import HttpConstants from '../constants/http';
+import MessagesError from '../constants/messagesError';
 
 function validateData(req, res, next) {
   const { title, description, address, type } = req.body;
 
   if (!title || !description || !address || !type) {
-    return res.status(400).json({
-      message: 'Dados inválidos',
-    });
+    throw createError(HttpConstants.BadRequest, MessagesError.InvalidParams);
   }
 
   next();
@@ -20,9 +23,7 @@ async function validateAdoptionExists(req, res, next) {
   });
 
   if (!adoption) {
-    return res.status(404).json({
-      message: 'Não encontrado',
-    });
+    throw createError(HttpConstants.NoContent, MessagesError.NotFound);
   }
 
   req.adoptionUid = adoption.uid;

@@ -1,15 +1,17 @@
-import UserRepository from '../repositories/UserRepository';
+import UserService from '../services/User';
+
+import HttpConstants from '../constants/http';
 
 class UserController {
   async index(req, res) {
-    const { page, limit } = req.query;
+    const { limit, page } = req.query;
 
     try {
-      const data = await UserRepository.getAll(page ?? 1, limit ?? 100);
+      const data = await UserService.getAll(limit ?? 10, page ?? 1);
 
       return res.json(data);
     } catch (error) {
-      return res.status(error.status || 400).json(error);
+      return res.status(error.status || HttpConstants.BadRequest).json(error);
     }
   }
 
@@ -17,33 +19,43 @@ class UserController {
     const { uid } = req.params;
 
     try {
-      const data = await UserRepository.find(uid);
+      const data = await UserService.find(uid);
 
       return res.json(data);
     } catch (error) {
-      return res.status(error.status || 400).json(error);
+      return res.status(error.status || HttpConstants.BadRequest).json(error);
     }
   }
 
   async store(req, res) {
-    try {
-      const data = await UserRepository.save(req.body);
+    const { email, password, name, city, phone } = req.body;
 
-      return res.status(201).json(data);
+    try {
+      const data = await UserService.save(email, password, name, city, phone);
+
+      return res.status(HttpConstants.Created).json(data);
     } catch (error) {
-      return res.status(error.status || 400).json(error);
+      return res.status(error.status || HttpConstants.BadRequest).json(error);
     }
   }
 
   async update(req, res) {
     const { uid } = req.params;
+    const { email, password, name, city, phone } = req.body;
 
     try {
-      const data = await UserRepository.update(req.body, uid);
+      const data = await UserService.update(
+        email,
+        password,
+        name,
+        city,
+        phone,
+        uid
+      );
 
       return res.json(data);
     } catch (error) {
-      return res.status(error.status || 400).json(error);
+      return res.status(error.status || HttpConstants.BadRequest).json(error);
     }
   }
 
@@ -51,11 +63,11 @@ class UserController {
     const { uid } = req.params;
 
     try {
-      await UserRepository.remove(uid);
+      await UserService.remove(uid);
 
-      return res.sendStatus(204);
+      return res.sendStatus(HttpConstants.NoContent);
     } catch (error) {
-      return res.status(error.status || 400).json(error);
+      return res.status(error.status || HttpConstants.BadRequest).json(error);
     }
   }
 }
