@@ -38,7 +38,7 @@ describe('users', () => {
       expect.assertions(1);
 
       const response = await request(app).post('/users').send({
-        email: 'mateus@example2.com',
+        email: 'mateus@example.com',
         password: 12345678,
         name: 'Mateus',
         city: true,
