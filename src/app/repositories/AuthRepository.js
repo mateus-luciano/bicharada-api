@@ -12,13 +12,14 @@ class AuthRepository {
       },
     });
 
-    const { uid, name } = user;
+    const { uid, name, admin } = user;
 
     return {
       user: {
         uid,
         email,
         name,
+        admin,
       },
       token: jwt.sign({ uid }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
