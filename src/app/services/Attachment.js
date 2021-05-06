@@ -1,17 +1,17 @@
 import AttachmentRepository from '../repositories/Attachment';
-import Cache from '../utils/Cache';
+// import Cache from '../utils/Cache';
 
 class AttachmentService {
   async getAll() {
-    const cache = await Cache.get('attachments');
+    // const cache = await Cache.get('attachments');
 
-    if (cache !== null) {
-      return JSON.parse(cache);
-    }
+    // if (cache !== null) {
+    //   return JSON.parse(cache);
+    // }
 
     const data = await AttachmentRepository.getAll();
 
-    await Cache.set('adoptions', JSON.stringify(data));
+    // await Cache.set('adoptions', JSON.stringify(data));
 
     return data;
   }

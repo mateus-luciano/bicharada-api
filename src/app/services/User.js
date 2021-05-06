@@ -1,17 +1,17 @@
 import UserRepository from '../repositories/User';
-import Cache from '../utils/Cache';
+// import Cache from '../utils/Cache';
 
 class UserService {
   async getAll(limit, page) {
-    const cache = await Cache.get(`users-${page}`);
+    // const cache = await Cache.get(`users-${page}`);
 
-    if (cache !== null) {
-      return JSON.parse(cache);
-    }
+    // if (cache !== null) {
+    //   return JSON.parse(cache);
+    // }
 
     const data = await UserRepository.getAll(limit, page);
 
-    await Cache.set(`users-${page}`, JSON.stringify(data));
+    // await Cache.set(`users-${page}`, JSON.stringify(data));
 
     return data;
   }

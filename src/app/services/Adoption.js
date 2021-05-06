@@ -1,17 +1,17 @@
 import AdoptionRepository from '../repositories/Adoption';
-import Cache from '../utils/Cache';
+// import Cache from '../utils/Cache';
 
 class AdoptionService {
   async getAll(limit, page) {
-    const cache = await Cache.get(`adoptions-${page}`);
+    // const cache = await Cache.get(`adoptions-${page}`);
 
-    if (cache !== null) {
-      return JSON.parse(cache);
-    }
+    // if (cache !== null) {
+    //   return JSON.parse(cache);
+    // }
 
     const data = await AdoptionRepository.getAll(limit, page);
 
-    await Cache.set(`adoptions-${page}`, JSON.stringify(data));
+    // await Cache.set(`adoptions-${page}`, JSON.stringify(data));
 
     return data;
   }
