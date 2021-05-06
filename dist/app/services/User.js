@@ -22,14 +22,29 @@ class UserService {
     return data;
   }
 
-  async save(email, password, name, city, phone) {
-    const data = _User2.default.save(email, password, name, city, phone);
+  async save(email, password, name, city, phone, region) {
+    const data = _User2.default.save(
+      email,
+      password,
+      name,
+      city,
+      phone,
+      region
+    );
 
     return data;
   }
 
-  async update(email, password, name, city, phone, uid) {
-    const data = _User2.default.update(email, password, name, city, phone, uid);
+  async update(email, password, name, city, phone, region, uid) {
+    const data = _User2.default.update(
+      email,
+      password,
+      name,
+      city,
+      phone,
+      region,
+      uid
+    );
 
     return data;
   }

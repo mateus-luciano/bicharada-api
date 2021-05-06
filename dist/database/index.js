@@ -4,8 +4,9 @@ var _database = require('../config/database'); var _database2 = _interopRequireD
 var _User = require('../app/models/User'); var _User2 = _interopRequireDefault(_User);
 var _Adoption = require('../app/models/Adoption'); var _Adoption2 = _interopRequireDefault(_Adoption);
 var _Attachment = require('../app/models/Attachment'); var _Attachment2 = _interopRequireDefault(_Attachment);
+var _Region = require('../app/models/Region'); var _Region2 = _interopRequireDefault(_Region);
 
-const models = [_User2.default, _Adoption2.default, _Attachment2.default];
+const models = [_User2.default, _Adoption2.default, _Attachment2.default, _Region2.default];
 
 class Database {
   constructor() {

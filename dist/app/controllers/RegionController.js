@@ -1,13 +1,11 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; } function _nullishCoalesce(lhs, rhsFn) { if (lhs != null) { return lhs; } else { return rhsFn(); } }var _User = require('../services/User'); var _User2 = _interopRequireDefault(_User);
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _Region = require('../services/Region'); var _Region2 = _interopRequireDefault(_Region);
 
 var _http = require('../constants/http'); var _http2 = _interopRequireDefault(_http);
 
-class UserController {
+class RegionController {
   async index(req, res) {
-    const { limit, page } = req.query;
-
     try {
-      const data = await _User2.default.getAll(_nullishCoalesce(limit, () => ( 10)), _nullishCoalesce(page, () => ( 1)));
+      const data = await _Region2.default.getAll();
 
       return res.json(data);
     } catch (error) {
@@ -19,7 +17,7 @@ class UserController {
     const { uid } = req.params;
 
     try {
-      const data = await _User2.default.find(uid);
+      const data = await _Region2.default.find(uid);
 
       return res.json(data);
     } catch (error) {
@@ -28,17 +26,10 @@ class UserController {
   }
 
   async store(req, res) {
-    const { email, password, name, city, phone, region } = req.body;
+    const { name } = req.body;
 
     try {
-      const data = await _User2.default.save(
-        email,
-        password,
-        name,
-        city,
-        phone,
-        region
-      );
+      const data = await _Region2.default.save(name);
 
       return res.status(_http2.default.Created).json(data);
     } catch (error) {
@@ -48,18 +39,10 @@ class UserController {
 
   async update(req, res) {
     const { uid } = req.params;
-    const { email, password, name, city, phone, region } = req.body;
+    const { name } = req.body;
 
     try {
-      const data = await _User2.default.update(
-        email,
-        password,
-        name,
-        city,
-        phone,
-        region,
-        uid
-      );
+      const data = await _Region2.default.update(name, uid);
 
       return res.json(data);
     } catch (error) {
@@ -71,7 +54,7 @@ class UserController {
     const { uid } = req.params;
 
     try {
-      await _User2.default.remove(uid);
+      await _Region2.default.remove(uid);
 
       return res.sendStatus(_http2.default.NoContent);
     } catch (error) {
@@ -80,4 +63,4 @@ class UserController {
   }
 }
 
-exports. default = new UserController();
+exports. default = new RegionController();

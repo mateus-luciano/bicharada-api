@@ -21,24 +21,26 @@ class AdoptionService {
     return data;
   }
 
-  async save(title, description, address, type, uid) {
+  async save(title, description, address, type, region, uid) {
     const data = await _Adoption2.default.save(
       title,
       description,
       address,
       type,
+      region,
       uid
     );
 
     return data;
   }
 
-  async update(title, description, address, type, uid) {
+  async update(title, description, address, type, region, uid) {
     const data = await _Adoption2.default.update(
       title,
       description,
       address,
       type,
+      region,
       uid
     );
 

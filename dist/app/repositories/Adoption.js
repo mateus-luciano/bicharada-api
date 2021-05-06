@@ -4,7 +4,7 @@ var _Attachment = require('../models/Attachment'); var _Attachment2 = _interopRe
 class AdoptionRepository {
   async getAll(limit, page) {
     const response = await _Adoption2.default.findAndCountAll({
-      attributes: ['uid', 'title', 'description', 'address', 'type'],
+      attributes: ['uid', 'title', 'description', 'address', 'type', 'status'],
       order: [['created_at', 'DESC']],
       limit,
       offset: limit * (page - 1),
@@ -21,7 +21,7 @@ class AdoptionRepository {
   async find(uid) {
     const response = await _Adoption2.default.findOne({
       where: { uid },
-      attributes: ['uid', 'title', 'description', 'address', 'type'],
+      attributes: ['uid', 'title', 'description', 'address', 'type', 'status'],
     });
 
     const attachments = await _Attachment2.default.findAll({
@@ -35,25 +35,27 @@ class AdoptionRepository {
     };
   }
 
-  async save(title, description, address, type, uid) {
+  async save(title, description, address, type, region, uid) {
     const response = await _Adoption2.default.create({
       title,
       description,
       address,
       type,
       user_uid: uid,
+      region_uid: region,
     });
 
     return response;
   }
 
-  async update(title, description, address, type, uid) {
+  async update(title, description, address, type, region, uid) {
     const response = await _Adoption2.default.update(
       {
         title,
         description,
         address,
         type,
+        region_uid: region,
       },
       {
         where: { uid },

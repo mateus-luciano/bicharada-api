@@ -10,6 +10,11 @@ class Adoption extends _sequelize.Model {
           defaultValue: _sequelize2.default.DataTypes.UUIDV4,
           primaryKey: true,
         },
+        status: {
+          type: _sequelize2.default.DataTypes.BOOLEAN,
+          allowNull: true,
+          defaultValue: true,
+        },
         title: {
           type: _sequelize2.default.DataTypes.STRING(60),
           allowNull: false,
@@ -36,6 +41,16 @@ class Adoption extends _sequelize.Model {
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE',
         },
+        region_uid: {
+          type: _sequelize2.default.DataTypes.UUID,
+          allowNull: false,
+          references: {
+            model: 'regions',
+            key: 'uid',
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE',
+        },
       },
       {
         sequelize,
@@ -51,10 +66,13 @@ class Adoption extends _sequelize.Model {
       as: 'user',
       foreignKey: 'user_uid',
     });
-
     this.hasMany(models.Attachment, {
       as: 'attachments',
       foreignKey: 'adoption_uid',
+    });
+    this.belongsTo(models.Region, {
+      as: 'region',
+      foreignKey: 'region_uid',
     });
   }
 }

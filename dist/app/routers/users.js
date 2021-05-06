@@ -32,8 +32,7 @@ routes.get(
 );
 routes.get(
   '/users/:uid',
-  _auth2.default,
-  _user.validateUserExists,
+  [_auth2.default, _user.validateUserExists],
   _UserController2.default.show
   /*
   #swagger.tags = ['Usuários']
@@ -57,8 +56,7 @@ routes.get(
 );
 routes.post(
   '/users',
-  _user.checkEmail,
-  _user.validateData,
+  [_user.validateData, _user.checkEmail],
   _UserController2.default.store
   /*
   #swagger.tags = ['Usuários']
@@ -82,9 +80,7 @@ routes.post(
 );
 routes.put(
   '/users/:uid',
-  _auth2.default,
-  _user.validateUserExists,
-  _user.validateData,
+  [_auth2.default, _user.validateUserExists, _user.validateData],
   _UserController2.default.update
   /*
   #swagger.tags = ['Usuários']
@@ -122,8 +118,7 @@ routes.put(
 );
 routes.delete(
   '/users/:uid',
-  _auth2.default,
-  _user.validateUserExists,
+  [_auth2.default, _user.validateUserExists],
   _UserController2.default.delete
   /*
   #swagger.tags = ['Usuários']

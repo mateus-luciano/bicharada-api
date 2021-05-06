@@ -1,0 +1,110 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Doc minha API",
+    "description": "Minha descrição"
+  },
+  "host": "bicharada-backend.herokuapp.com",
+  "basePath": "/",
+  "tags": [],
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "description": "JWT Token",
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "UserList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uid": {
+            "type": "string",
+            "example": "17a3ef3a-2c78-446e-a7eb-71c65adca270"
+          },
+          "email": {
+            "type": "string",
+            "example": "mateus@example.com"
+          },
+          "name": {
+            "type": "string",
+            "example": "Mateus Luciano da Silva"
+          },
+          "city": {
+            "type": "string",
+            "example": "Parobé"
+          },
+          "phone": {
+            "type": "string",
+            "example": "45 991434191"
+          }
+        }
+      }
+    },
+    "UserStore": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "mateus@example.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "mateus123"
+        },
+        "name": {
+          "type": "string",
+          "example": "Mateus Luciano da Silva"
+        },
+        "city": {
+          "type": "string",
+          "example": "Parobé"
+        },
+        "phone": {
+          "type": "string",
+          "example": "45 991434191"
+        }
+      }
+    },
+    "UserUpdate": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "mateus@example.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "mateus123"
+        },
+        "name": {
+          "type": "string",
+          "example": "Mateus Luciano da Silva"
+        },
+        "city": {
+          "type": "string",
+          "example": "Novo Hamburgo"
+        },
+        "phone": {
+          "type": "string",
+          "example": "45 999999999"
+        }
+      }
+    }
+  },
+  "defaultModelsExpandDepth": -1
+}
