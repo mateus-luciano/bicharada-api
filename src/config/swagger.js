@@ -12,11 +12,11 @@ module.exports = {
   },
   host,
   basePath: '/',
-  schemes: ['http'],
+  schemes: ['https'],
   consumes: ['application/json'],
   produces: ['application/json'],
   defaultModelsExpandDepth: -1,
-  securityDefinitions: {
+  securityDefinitions: {'''''
     Bearer: {
       description: 'JWT Token',
       type: 'apiKey',
