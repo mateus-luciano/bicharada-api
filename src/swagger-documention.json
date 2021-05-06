@@ -5,11 +5,11 @@
     "title": "Doc minha API",
     "description": "Minha descrição"
   },
-  "host": "localhost:3333",
+  "host": "bicharada-backend.herokuapp.com",
   "basePath": "/",
   "tags": [],
   "schemes": [
-    "http"
+    "https"
   ],
   "securityDefinitions": {
     "Bearer": {
