@@ -1,96 +1,51 @@
-/* eslint-disable no-underscore-dangle */
 import request from 'supertest';
 import app from '../../src/app';
 
 describe('users', () => {
-  describe('create user', () => {
+  describe('create', () => {
     it('should create a new user', async () => {
-      expect.assertions(5);
+      expect.assertions(1);
+
+      const region = await request(app).post('/regions').send({
+        name: 'Vale do Paranhana',
+      });
 
       const response = await request(app).post('/users').send({
-        email: 'test@example.com',
-        password: 'test123',
-        firstName: 'Test',
-        lastName: 'Test Last Name',
+        email: 'mateus@example.com',
+        password: '12345678',
+        name: 'Mateus',
+        city: 'Parobé',
+        phone: '(51) 9 9999-9999',
+        region: region.body.uid,
       });
 
       expect(response.status).toBe(201);
-      expect(response.body).toHaveProperty('uid');
-      expect(response.body.email).toBe('test@example.com');
-      expect(response.body.first_name).toBe('Test');
-      expect(response.body.last_name).toBe('Test Last Name');
     });
-  });
 
-  describe('update data user', () => {
-    it('should update a user data', async () => {
-      expect.assertions(4);
-
-      const user = await request(app).post('/users').send({
-        email: 'test2@example.com',
-        password: 'test123',
-        firstName: 'Test2',
-        lastName: 'Test Last Name2',
-      });
-
-      const response = await request(app).put(`/users/${user.body.uid}`).send({
-        email: 'test2@example.com',
-        password: 'newpassword123',
-        firstName: 'New Name',
-        lastName: 'New Last Name',
-      });
-
-      expect(response.status).toBe(200);
-      expect(response.request._data.email).toBe('test2@example.com');
-      expect(response.request._data.firstName).toBe('New Name');
-      expect(response.request._data.lastName).toBe('New Last Name');
-    });
-  });
-
-  describe('show one user', () => {
-    it('should find and show only one user', async () => {
-      expect.assertions(4);
-
-      const user = await request(app).post('/users').send({
-        email: 'test3@example.com',
-        password: 'test123',
-        firstName: 'Test3',
-        lastName: 'Test Last Name3',
-      });
-
-      const response = await request(app).get(`/users/${user.body.uid}`);
-
-      expect(response.status).toBe(200);
-      expect(response.body.user.email).toBe('test3@example.com');
-      expect(response.body.user.first_name).toBe('Test3');
-      expect(response.body.user.last_name).toBe('Test Last Name3');
-    });
-  });
-
-  describe('delete customer', () => {
-    it('should delete all user data', async () => {
+    it('should not create a new user without all parameters', async () => {
       expect.assertions(1);
 
-      const user = await request(app).post('/users').send({
-        email: 'test4@example.com',
-        password: 'test123',
-        firstName: 'Test4',
-        lastName: 'Test Last Name4',
+      const response = await request(app).post('/users').send({
+        email: 'mateus@example.com',
+        password: '12345678',
+        name: 'Mateus',
       });
 
-      const response = await request(app).delete(`/users/${user.body.uid}`);
-
-      expect(response.status).toBe(204);
+      expect(response.status).toBe(400);
     });
-  });
 
-  describe('show all customers', () => {
-    it('should show the data of all customers', async () => {
+    it('should not create a new user with invalid parameters', async () => {
       expect.assertions(1);
 
-      const response = await request(app).get('/users');
+      const response = await request(app).post('/users').send({
+        email: 'mateus@example2.com',
+        password: 12345678,
+        name: 'Mateus',
+        city: true,
+        phone: '(51) 9 9999-9999',
+      });
 
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(400);
     });
   });
 });
