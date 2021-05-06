@@ -30,7 +30,7 @@ class UserRepository {
     });
 
     return {
-      data: response.data,
+      data: response,
       adoptions,
     };
   }
