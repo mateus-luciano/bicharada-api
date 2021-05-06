@@ -1,8 +1,17 @@
 import RegionRepository from '../repositories/Region';
+import Cache from '../utils/Cache';
 
 class RegionService {
   async getAll() {
+    const cache = await Cache.get('regions');
+
+    if (cache !== null) {
+      return JSON.parse(cache);
+    }
+
     const data = await RegionRepository.getAll();
+
+    await Cache.set('regions', JSON.stringify(data));
 
     return data;
   }
