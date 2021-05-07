@@ -1,4 +1,4 @@
-import createError from 'http-errors';
+// import createError from 'http-errors';
 
 import User from '../models/User';
 
@@ -13,7 +13,10 @@ async function checkUserExists(req, res, next) {
   });
 
   if (!user) {
-    throw createError(HttpConstants.BadRequest, LoginConstants.InvalidEmail);
+    return res
+      .status(HttpConstants.BadRequest)
+      .json({ message: LoginConstants.InvalidEmail });
+    // throw createError(HttpConstants.BadRequest, LoginConstants.InvalidEmail);
   }
 
   next();
@@ -27,10 +30,13 @@ async function checkPassword(req, res, next) {
   });
 
   if (!(await user.checkPassword(password))) {
-    throw createError(
-      HttpConstants.Unauthorized,
-      LoginConstants.InvalidPassword
-    );
+    return res
+      .status(HttpConstants.Unauthorized)
+      .json({ message: LoginConstants.InvalidPassword });
+    // throw createError(
+    //   HttpConstants.Unauthorized,
+    //   LoginConstants.InvalidPassword
+    // );
   }
 
   next();

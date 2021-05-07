@@ -55,7 +55,7 @@ class AuthRepository {
     mailer.sendMail(
       {
         to: email,
-        from: 'teeusdm@gmail.com',
+        from: process.env.EMAIL_BASE,
         html: `<p>Voce esqueceu sua senha? utilize o token { ${token} }, para recuperar.</p>`,
       },
       (error) => {
