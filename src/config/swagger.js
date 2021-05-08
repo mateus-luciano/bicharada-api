@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const host = process.env.API_URL;
 
-const { User, UserStore, UserUpdate } = require('../app/documentation/user');
+const user = require('../app/documentation/user');
 
 module.exports = {
   info: {
@@ -25,8 +25,6 @@ module.exports = {
     },
   },
   definitions: {
-    UserList: [User],
-    UserStore,
-    UserUpdate,
+    user,
   },
 };

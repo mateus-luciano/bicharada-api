@@ -14,20 +14,26 @@ routes.get(
   authMiddleware,
   UserControler.index
   /*
-  #swagger.tags = ['Usuários']
-  #swagger.description = 'Endpoint para buscar todos os usuários'
+  #swagger.tags = ['Usuários'] 
+  #swagger.description = 'Endpoint para buscar um usuário'
   #swagger.security = [{Bearer: []}]
-  #swagger.response[200] = {
-    description: 'Lista de usuários',
+  #swagger.parameters['limit'] = {
+    in: 'path',
+    description: 'Limite',
+    required: true,
+    type: 'integer'
+  }
+  #swagger.parameters['page'] = {
+    in: 'path',
+    description: 'Número da página',
+    required: true,
+    type: 'integer'
+  }
+  #swagger.responses[400] = {
     schema: {
-      $ref: "#definitions/UserList"
+      message: 'BAD_REQUEST'
     }
   }
-    #swagger.responses[400] = {
-      schema: {
-        message: 'BAD_REQUEST'
-      }
-    }
   */
 );
 routes.get(
@@ -37,6 +43,7 @@ routes.get(
   /*
   #swagger.tags = ['Usuários']
   #swagger.description = 'Endpoint para buscar um usuário'
+
   #swagger.security = [{Bearer: []}]
   #swagger.parameters['uid'] = {
     in: 'path',
@@ -47,11 +54,11 @@ routes.get(
       "$ref": "#definitions/UserList"
     },
   }
-    #swagger.responses[404] = {
-      schema: {
-        message: 'NOT_FOUND'
-      }
+  #swagger.responses[404] = {
+    schema: {
+      message: 'NOT_FOUND'
     }
+  }
   */
 );
 routes.post(
@@ -61,21 +68,49 @@ routes.post(
   /*
   #swagger.tags = ['Usuários']
   #swagger.description = 'Endpoint para cadastrar um usuário'
-  #swagger.security = [{Bearer: []}]
-  #swagger.parameters['Users'] = {
+  #swwager.response[201]
+
+  #swagger.parameters['name'] = {
     in: 'body',
-    description: 'Cadastrar novo usuário',
+    description: 'nome do usuário',
     required: true,
-    type: 'string',
+    type: 'string'
+  }
+  #swagger.parameters['email'] = {
+    in: 'body',
+    description: 'E-mail do usuário',
+    required: true,
+    type: 'string'
+  }
+  #swagger.parameters['password'] = {
+    in: 'body',
+    description: 'senha do usuário',
+    required: true,
+    type: 'string'
+  }
+  #swagger.parameters['phone'] = {
+    in: 'body',
+    description: 'telefone do usuário',
+    required: true,
+    type: 'string'
+  }
+  #swagger.parameters['city'] = {
+    in: 'body',
+    description: 'telefone do usuário',
+    required: true,
+    type: 'string'
+  }
+  #swagger.parameters['region'] = {
+    in: 'body',
+    description: 'uid da região do usuário',
+    required: true,
+    type: 'UUID'
+  }
+  #swagger.responses[400] = {
     schema: {
-      $ref: "#definitions/UserStore"
+      message: 'BAD_REQUEST'
     }
   }
-    #swagger.responses[400] = {
-      schema: {
-        message: 'BAD_REQUEST'
-      }
-    }
   */
 );
 routes.put(
@@ -86,6 +121,7 @@ routes.put(
   #swagger.tags = ['Usuários']
   #swagger.description = 'Endpoint para atualizar uma categotia'
   #swagger.security = [{Bearer: []}]
+
   #swagger.parameters['uid'] = {
     in: 'path',
     description: 'UID do usuário',
@@ -94,15 +130,39 @@ routes.put(
   }
   #swagger.parameters['name'] = {
     in: 'body',
-    description: 'Nome da categoria',
+    description: 'nome do usuário',
     required: true,
     type: 'string'
-    }
-  #swagger.response[200] = {
-    description: 'Categoria atualizada com sucesso',
-    schema: {
-      $ref: "#definitions/UserUpdate"
-    }
+  }
+  #swagger.parameters['email'] = {
+    in: 'body',
+    description: 'E-mail do usuário',
+    required: true,
+    type: 'string'
+  }
+  #swagger.parameters['password'] = {
+    in: 'body',
+    description: 'senha do usuário',
+    required: true,
+    type: 'string'
+  }
+  #swagger.parameters['phone'] = {
+    in: 'body',
+    description: 'telefone do usuário',
+    required: true,
+    type: 'string'
+  }
+  #swagger.parameters['city'] = {
+    in: 'body',
+    description: 'telefone do usuário',
+    required: true,
+    type: 'string'
+  }
+  #swagger.parameters['region'] = {
+    in: 'body',
+    description: 'uid da região do usuário',
+    required: true,
+    type: 'uuid'
   }
   #swagger.responses[400] = {
     schema: {
@@ -122,11 +182,12 @@ routes.delete(
   UserControler.delete
   /*
   #swagger.tags = ['Usuários']
-  #swagger.description = 'Endpoint para deletar uma categotia'
+  #swagger.description = 'Endpoint para deletar um usuário'
   #swagger.security = [{Bearer: []}]
+
   #swagger.parameters['uid'] = {
     in: 'path',
-    description: 'ID da categoria',
+    description: 'uid da categoria',
     required: true,
     type: 'UUID',
   } 
