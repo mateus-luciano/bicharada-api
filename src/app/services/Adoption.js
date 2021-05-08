@@ -1,25 +1,45 @@
 import AdoptionRepository from '../repositories/Adoption';
-// import Cache from '../utils/Cache';
+import Cache from '../../lib/Cache';
 
 class AdoptionService {
   async getAll(limit, page) {
-    // const cache = await Cache.get(`adoptions-${page}`);
+    const adoptionsCache = await Cache.get(`adoptions-${page}`);
 
-    // if (cache !== null) {
-    //   return JSON.parse(cache);
-    // }
+    if (adoptionsCache !== null) {
+      return {
+        data: JSON.parse(adoptionsCache),
+        cache: true,
+      };
+    }
 
     const data = await AdoptionRepository.getAll(limit, page);
 
-    // await Cache.set(`adoptions-${page}`, JSON.stringify(data));
+    await Cache.setExpire(`adoptions-${page}`, JSON.stringify(data), 3600);
 
-    return data;
+    return {
+      data,
+      cache: false,
+    };
   }
 
   async find(uid) {
+    const adoptionCache = await Cache.get(`adoption-${uid}`);
+
+    if (adoptionCache !== null) {
+      return {
+        data: JSON.parse(adoptionCache),
+        cache: true,
+      };
+    }
+
     const data = await AdoptionRepository.find(uid);
 
-    return data;
+    await Cache.setExpire(`adoption-${uid}`, JSON.stringify(data), 3600);
+
+    return {
+      data,
+      cache: false,
+    };
   }
 
   async save(title, description, address, type, region, uid) {
@@ -45,11 +65,17 @@ class AdoptionService {
       uid
     );
 
-    return data;
+    await Cache.setExpire(`adoption-${uid}`, JSON.stringify(data), 3600);
+
+    return {
+      data,
+      cache: false,
+    };
   }
 
   async remove(uid) {
     await AdoptionRepository.remove(uid);
+    await Cache.delete(`adoption-${uid}`);
   }
 }
 
