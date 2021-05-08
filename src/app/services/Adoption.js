@@ -16,10 +16,11 @@ class AdoptionService {
 
     // await Cache.setExpire(`adoptions--${page}`, JSON.stringify(data), 3600);
 
-    return {
-      data,
-      cache: false,
-    };
+    // return {
+    //   data,
+    //   cache: false,
+    // };
+    return data;
   }
 
   async find(uid) {
@@ -36,10 +37,11 @@ class AdoptionService {
 
     // await Cache.setExpire(`adoption-${uid}`, JSON.stringify(data), 3600);
 
-    return {
-      data,
-      cache: false,
-    };
+    // return {
+    //   data,
+    //   cache: false,
+    // };
+    return data;
   }
 
   async save(title, description, address, type, region, uid) {
@@ -67,10 +69,11 @@ class AdoptionService {
 
     // await Cache.setExpire(`adoption-${uid}`, JSON.stringify(data), 3600);
 
-    return {
-      data,
-      cache: false,
-    };
+    // return {
+    //   data,
+    //   cache: false,
+    // };
+    return data;
   }
 
   async remove(uid) {

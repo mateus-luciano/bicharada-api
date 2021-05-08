@@ -16,10 +16,11 @@ class UserService {
 
     // await Cache.setExpire(`users--${page}`, JSON.stringify(data), 3600);
 
-    return {
-      data,
-      cache: false,
-    };
+    // return {
+    //   data,
+    //   cache: false,
+    // };
+    return data;
   }
 
   async find(uid) {
@@ -36,10 +37,11 @@ class UserService {
 
     // await Cache.setExpire(`user-${uid}`, JSON.stringify(data), 3600);
 
-    return {
-      data,
-      cache: false,
-    };
+    // return {
+    //   data,
+    //   cache: false,
+    // };
+    return data;
   }
 
   async save(email, password, name, city, phone, region) {
@@ -68,10 +70,11 @@ class UserService {
 
     // await Cache.setExpire(`user-${uid}`, JSON.stringify(data), 3600);
 
-    return {
-      data,
-      cache: false,
-    };
+    // return {
+    //   data,
+    //   cache: false,
+    // };
+    return data;
   }
 
   async remove(uid) {
