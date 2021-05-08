@@ -23,7 +23,10 @@ async function checkEmail(req, res, next) {
   });
 
   if (user) {
-    throw createError(HttpConstants.Conflict, UserConstants.InvalidEmail);
+    // throw createError(HttpConstants.Conflict, UserConstants.InvalidEmail);
+    return res
+      .status(HttpConstants.Conflict)
+      .json({ message: UserConstants.InvalidEmail });
   }
 
   next();
@@ -37,7 +40,10 @@ async function validateUserExists(req, res, next) {
   });
 
   if (!user) {
-    throw createError(HttpConstants.NotFound, UserConstants.UserNotFound);
+    // throw createError(HttpConstants.NotFound, UserConstants.UserNotFound);
+    return res
+      .status(HttpConstants.NotFound)
+      .json({ message: UserConstants.UserNotFound });
   }
 
   next();
