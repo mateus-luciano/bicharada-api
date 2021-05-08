@@ -1,20 +1,20 @@
 import AdoptionRepository from '../repositories/Adoption';
-import Cache from '../../lib/Cache';
+// import Cache from '../../lib/Cache';
 
 class AdoptionService {
   async getAll(limit, page) {
-    const adoptionsCache = await Cache.get(`adoptions--${page}`);
+    // const adoptionsCache = await Cache.get(`adoptions--${page}`);
 
-    if (adoptionsCache !== null) {
-      return {
-        data: JSON.parse(adoptionsCache),
-        cache: true,
-      };
-    }
+    // if (adoptionsCache !== null) {
+    //   return {
+    //     data: JSON.parse(adoptionsCache),
+    //     cache: true,
+    //   };
+    // }
 
     const data = await AdoptionRepository.getAll(limit, page);
 
-    await Cache.setExpire(`adoptions--${page}`, JSON.stringify(data), 3600);
+    // await Cache.setExpire(`adoptions--${page}`, JSON.stringify(data), 3600);
 
     return {
       data,
@@ -23,18 +23,18 @@ class AdoptionService {
   }
 
   async find(uid) {
-    const adoptionCache = await Cache.get(`adoption-${uid}`);
+    // const adoptionCache = await Cache.get(`adoption-${uid}`);
 
-    if (adoptionCache !== null) {
-      return {
-        data: JSON.parse(adoptionCache),
-        cache: true,
-      };
-    }
+    // if (adoptionCache !== null) {
+    //   return {
+    //     data: JSON.parse(adoptionCache),
+    //     cache: true,
+    //   };
+    // }
 
     const data = await AdoptionRepository.find(uid);
 
-    await Cache.setExpire(`adoption-${uid}`, JSON.stringify(data), 3600);
+    // await Cache.setExpire(`adoption-${uid}`, JSON.stringify(data), 3600);
 
     return {
       data,
@@ -65,7 +65,7 @@ class AdoptionService {
       uid
     );
 
-    await Cache.setExpire(`adoption-${uid}`, JSON.stringify(data), 3600);
+    // await Cache.setExpire(`adoption-${uid}`, JSON.stringify(data), 3600);
 
     return {
       data,
@@ -75,7 +75,7 @@ class AdoptionService {
 
   async remove(uid) {
     await AdoptionRepository.remove(uid);
-    await Cache.delete(`adoption-${uid}`);
+    // await Cache.delete(`adoption-${uid}`);
   }
 }
 
