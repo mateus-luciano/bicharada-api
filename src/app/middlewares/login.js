@@ -12,6 +12,12 @@ async function checkUserExists(req, res, next) {
     where: { email },
   });
 
+  if (!email) {
+    return res
+      .status(HttpConstants.BadRequest)
+      .json({ message: LoginConstants.EmptyEmail });
+  }
+
   if (!user) {
     return res
       .status(HttpConstants.BadRequest)
@@ -24,6 +30,12 @@ async function checkUserExists(req, res, next) {
 
 async function checkPassword(req, res, next) {
   const { email, password } = req.body;
+
+  if (!password) {
+    return res
+      .status(HttpConstants.BadRequest)
+      .json({ message: LoginConstants.EmptyPassword });
+  }
 
   const user = await User.findOne({
     where: { email },

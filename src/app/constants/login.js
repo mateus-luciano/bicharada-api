@@ -1,10 +1,18 @@
 class LoginConstants {
   static get InvalidEmail() {
-    return 'E-mail inválido';
+    return 'E-mail não encontrado';
   }
 
   static get InvalidPassword() {
-    return 'Senha não confere';
+    return 'Senha errada!';
+  }
+
+  static get EmptyEmail() {
+    return 'Preencha o campo e-mail!';
+  }
+
+  static get EmptyPassword() {
+    return 'Preencha o campo senha!';
   }
 }
 
