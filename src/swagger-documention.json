@@ -29,7 +29,7 @@
     "/users": {
       "get": {
         "tags": [
-          "users"
+          "Usuários"
         ],
         "description": "Endpoint para buscar um usuário",
         "parameters": [
@@ -73,7 +73,7 @@
       },
       "post": {
         "tags": [
-          "users"
+          "Usuários"
         ],
         "description": "Endpoint para cadastrar um usuário",
         "parameters": [
@@ -142,7 +142,7 @@
     "/users/{uid}": {
       "get": {
         "tags": [
-          "users"
+          "Usuários"
         ],
         "description": "Endpoint para buscar um usuário",
         "parameters": [
@@ -182,7 +182,7 @@
       },
       "put": {
         "tags": [
-          "users"
+          "Usuários"
         ],
         "description": "Endpoint para atualizar uma categotia",
         "parameters": [
