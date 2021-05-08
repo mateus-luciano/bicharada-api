@@ -25,83 +25,341 @@
   "produces": [
     "application/json"
   ],
-  "paths": {},
-  "definitions": {
-    "UserList": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "uid": {
-            "type": "string",
-            "example": "17a3ef3a-2c78-446e-a7eb-71c65adca270"
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "Usuários"
+        ],
+        "description": "Endpoint para buscar um usuário",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "path",
+            "type": "integer",
+            "description": "Limite",
+            "required": true
           },
-          "email": {
-            "type": "string",
-            "example": "mateus@example.com"
+          {
+            "name": "page",
+            "in": "path",
+            "type": "integer",
+            "description": "Número da página",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "BAD_REQUEST"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "Bad Request"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Usuários"
+        ],
+        "description": "Endpoint para cadastrar um usuário",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "body",
+            "description": "nome do usuário",
+            "required": true,
+            "type": "string"
           },
-          "name": {
-            "type": "string",
-            "example": "Mateus Luciano da Silva"
+          {
+            "name": "email",
+            "in": "body",
+            "description": "E-mail do usuário",
+            "required": true,
+            "type": "string"
           },
-          "city": {
-            "type": "string",
-            "example": "Parobé"
+          {
+            "name": "password",
+            "in": "body",
+            "description": "senha do usuário",
+            "required": true,
+            "type": "string"
           },
-          "phone": {
-            "type": "string",
-            "example": "45 991434191"
+          {
+            "name": "phone",
+            "in": "body",
+            "description": "telefone do usuário",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "city",
+            "in": "body",
+            "description": "telefone do usuário",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "region",
+            "in": "body",
+            "description": "uid da região do usuário",
+            "required": true,
+            "type": "UUID"
+          }
+        ],
+        "responses": {
+          "400": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "BAD_REQUEST"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "Bad Request"
           }
         }
       }
     },
-    "UserStore": {
-      "type": "object",
-      "properties": {
-        "email": {
-          "type": "string",
-          "example": "mateus@example.com"
+    "/users/{uid}": {
+      "get": {
+        "tags": [
+          "Usuários"
+        ],
+        "description": "Endpoint para buscar um usuário",
+        "parameters": [
+          {
+            "name": "uid",
+            "in": "path",
+            "required": true,
+            "type": "UUID",
+            "description": "UID do usuário",
+            "schema": {
+              "$ref": "#definitions/UserList"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "NOT_FOUND"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "Not Found"
+          }
         },
-        "password": {
-          "type": "string",
-          "example": "mateus123"
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Usuários"
+        ],
+        "description": "Endpoint para atualizar uma categotia",
+        "parameters": [
+          {
+            "name": "uid",
+            "in": "path",
+            "required": true,
+            "type": "UUID",
+            "description": "UID do usuário"
+          },
+          {
+            "name": "name",
+            "in": "body",
+            "description": "nome do usuário",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "in": "body",
+            "description": "E-mail do usuário",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "body",
+            "description": "senha do usuário",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "phone",
+            "in": "body",
+            "description": "telefone do usuário",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "city",
+            "in": "body",
+            "description": "telefone do usuário",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "region",
+            "in": "body",
+            "description": "uid da região do usuário",
+            "required": true,
+            "type": "uuid"
+          }
+        ],
+        "responses": {
+          "400": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "BAD_REQUEST"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "NOT_FOUND"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "Not Found"
+          }
         },
-        "name": {
-          "type": "string",
-          "example": "Mateus Luciano da Silva"
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Usuários"
+        ],
+        "description": "Endpoint para deletar um usuário",
+        "parameters": [
+          {
+            "name": "uid",
+            "in": "path",
+            "required": true,
+            "type": "UUID",
+            "description": "uid da categoria"
+          }
+        ],
+        "responses": {
+          "400": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "BAD_REQUEST"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "NOT_FOUND"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "Not Found"
+          }
         },
-        "city": {
-          "type": "string",
-          "example": "Parobé"
-        },
-        "phone": {
-          "type": "string",
-          "example": "45 991434191"
-        }
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       }
-    },
-    "UserUpdate": {
+    }
+  },
+  "definitions": {
+    "user": {
       "type": "object",
       "properties": {
-        "email": {
-          "type": "string",
-          "example": "mateus@example.com"
-        },
-        "password": {
-          "type": "string",
-          "example": "mateus123"
-        },
-        "name": {
-          "type": "string",
-          "example": "Mateus Luciano da Silva"
-        },
-        "city": {
-          "type": "string",
-          "example": "Novo Hamburgo"
-        },
-        "phone": {
-          "type": "string",
-          "example": "45 999999999"
+        "exports": {
+          "type": "object",
+          "properties": {
+            "uid": {
+              "type": "string",
+              "example": "UUID do usuário"
+            },
+            "email": {
+              "type": "string",
+              "example": "E-mail do usuário"
+            },
+            "name": {
+              "type": "string",
+              "example": "Nome do usuário"
+            },
+            "city": {
+              "type": "string",
+              "example": "Cidade do usuário"
+            },
+            "phone": {
+              "type": "string",
+              "example": "Número do celular do usuário"
+            },
+            "region": {
+              "type": "string",
+              "example": "UUID da região do usuário"
+            }
+          }
         }
       }
     }
