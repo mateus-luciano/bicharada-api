@@ -3,7 +3,7 @@ import Cache from '../../lib/Cache';
 
 class AdoptionService {
   async getAll(limit, page) {
-    const adoptionsCache = await Cache.get(`adoptions-${page}`);
+    const adoptionsCache = await Cache.get(`adoptions--${page}`);
 
     if (adoptionsCache !== null) {
       return {
@@ -14,7 +14,7 @@ class AdoptionService {
 
     const data = await AdoptionRepository.getAll(limit, page);
 
-    await Cache.setExpire(`adoptions-${page}`, JSON.stringify(data), 3600);
+    await Cache.setExpire(`adoptions--${page}`, JSON.stringify(data), 3600);
 
     return {
       data,
