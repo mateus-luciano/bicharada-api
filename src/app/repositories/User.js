@@ -4,7 +4,7 @@ import Adoption from '../models/Adoption';
 class UserRepository {
   async getAll(limit, page) {
     const response = await User.findAndCountAll({
-      attributes: ['uid', 'email', 'name', 'city', 'phone'],
+      attributes: ['uid', 'email', 'name', 'city', 'phone', 'admin'],
       order: [['created_at', 'DESC']],
       limit,
       offset: limit * (page - 1),
