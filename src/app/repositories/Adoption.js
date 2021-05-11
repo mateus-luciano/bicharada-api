@@ -29,7 +29,15 @@ class AdoptionRepository {
   async find(uid) {
     const response = await Adoption.findOne({
       where: { uid },
-      attributes: ['uid', 'title', 'description', 'address', 'type', 'status'],
+      attributes: [
+        'uid',
+        'title',
+        'description',
+        'address',
+        'type',
+        'status',
+        'user_uid',
+      ],
     });
 
     const attachments = await Attachment.findAll({
