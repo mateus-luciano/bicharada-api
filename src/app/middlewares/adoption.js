@@ -23,7 +23,10 @@ async function validateAdoptionExists(req, res, next) {
   });
 
   if (!adoption) {
-    throw createError(HttpConstants.NoContent, MessagesError.NotFound);
+    // throw createError(HttpConstants.NoContent, MessagesError.NotFound);
+    return res
+      .status(HttpConstants.NotFound)
+      .json({ message: MessagesError.NotFound });
   }
 
   req.adoptionUid = adoption.uid;
