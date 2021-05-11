@@ -38,7 +38,7 @@ routes.get(
 );
 routes.get(
   '/users/:uid',
-  [authMiddleware, validateUserExists],
+  validateUserExists,
   UserControler.show
   /*
   #swagger.tags = ['Usuários']
