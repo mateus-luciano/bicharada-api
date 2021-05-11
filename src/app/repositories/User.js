@@ -21,7 +21,7 @@ class UserRepository {
   async find(uid) {
     const response = await User.findOne({
       where: { uid },
-      attributes: ['uid', 'email', 'name', 'city', 'phone'],
+      attributes: ['uid', 'email', 'name', 'city', 'phone', 'admin'],
     });
 
     const adoptions = await Adoption.findAll({
