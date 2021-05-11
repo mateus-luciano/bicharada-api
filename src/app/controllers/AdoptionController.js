@@ -28,7 +28,7 @@ class AdoptionController {
   }
 
   async store(req, res) {
-    const { title, description, address, type, region } = req.body;
+    const { title, description, address, type, region, userUid } = req.body;
 
     try {
       const data = await AdoptionService.save(
@@ -37,7 +37,8 @@ class AdoptionController {
         address,
         type,
         region,
-        req.uid
+        userUid
+        // req.uid
       );
 
       return res.status(HttpConstants.Created).json(data);
