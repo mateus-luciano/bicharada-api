@@ -1,5 +1,6 @@
 import User from '../models/User';
 import Adoption from '../models/Adoption';
+import Attachment from '../models/Attachment';
 
 class UserRepository {
   async getAll(limit, page) {
@@ -27,6 +28,14 @@ class UserRepository {
     const adoptions = await Adoption.findAll({
       where: { user_uid: uid },
       attributes: ['uid', 'title', 'description', 'address', 'type'],
+      include: [
+        {
+          model: Attachment,
+          as: 'attachments',
+          attributes: ['uid', 'url'],
+          order: [['created_at', 'DESC']],
+        },
+      ],
     });
 
     return {
