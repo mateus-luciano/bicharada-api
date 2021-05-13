@@ -13,7 +13,14 @@ class AdoptionRepository {
         'status',
         'user_uid',
       ],
-      order: [['created_at', 'DESC']],
+      include: [
+        {
+          model: Attachment,
+          as: 'attachments',
+          attributes: ['uid', 'url'],
+          order: [['created_at', 'DESC']],
+        },
+      ],
       limit,
       offset: limit * (page - 1),
     });
