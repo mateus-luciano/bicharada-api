@@ -24,11 +24,17 @@ class AdoptionRepository {
       limit,
       offset: limit * (page - 1),
     });
+    // provisório
+    const countAdoptions = await Adoption.findAndCountAll({
+      attributes: ['uid'],
+      limit,
+      offset: limit * (page - 1),
+    });
 
     return {
       current_page: page,
-      total_pages: Math.ceil(response.count / limit),
-      total: response.count,
+      total_pages: Math.ceil(countAdoptions.count / limit),
+      total: countAdoptions.count,
       data: response.rows,
     };
   }
