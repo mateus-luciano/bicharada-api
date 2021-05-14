@@ -5,14 +5,14 @@ import Attachment from '../models/Attachment';
 class AdoptionRepository {
   async getAll(limit, page, filter) {
     let condition = {};
-    if (filter) {
+    if (filter === 'all') {
       condition = {
         status: true,
-        [Op.and]: [{ type: filter }],
       };
     } else {
       condition = {
         status: true,
+        [Op.and]: [{ type: filter }],
       };
     }
     const response = await Adoption.findAndCountAll({
@@ -35,7 +35,7 @@ class AdoptionRepository {
       ],
       // where: {
       //   status: true,
-      //   [Op.and]: [{ type: filter }],
+      //   [Op.and]: [{ type: 'Gato' }, { type: 'Cachorro' }],
       // },
       where: condition,
       limit,
@@ -44,10 +44,7 @@ class AdoptionRepository {
     // provisório
     const countAdoptions = await Adoption.findAndCountAll({
       attributes: ['uid'],
-      where: {
-        status: true,
-        [Op.and]: [{ type: filter }],
-      },
+      where: condition,
       limit,
       offset: limit * (page - 1),
     });

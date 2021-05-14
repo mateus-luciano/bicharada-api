@@ -7,7 +7,11 @@ class AdoptionController {
     const { limit, page, filter } = req.query;
 
     try {
-      const data = await AdoptionService.getAll(limit ?? 10, page ?? 1, filter);
+      const data = await AdoptionService.getAll(
+        limit ?? 10,
+        page ?? 1,
+        filter ?? 'all'
+      );
 
       return res.json(data);
     } catch (error) {
