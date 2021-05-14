@@ -33,10 +33,6 @@ class AdoptionRepository {
           order: [['created_at', 'DESC']],
         },
       ],
-      // where: {
-      //   status: true,
-      //   [Op.and]: [{ type: 'Gato' }, { type: 'Cachorro' }],
-      // },
       where: condition,
       limit,
       offset: limit * (page - 1),
