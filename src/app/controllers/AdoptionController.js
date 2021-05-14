@@ -4,10 +4,10 @@ import HttpConstants from '../constants/http';
 
 class AdoptionController {
   async index(req, res) {
-    const { limit, page } = req.query;
+    const { limit, page, filter } = req.query;
 
     try {
-      const data = await AdoptionService.getAll(limit ?? 10, page ?? 1);
+      const data = await AdoptionService.getAll(limit ?? 10, page ?? 1, filter);
 
       return res.json(data);
     } catch (error) {

@@ -1,8 +1,20 @@
+import { Op } from 'sequelize';
 import Adoption from '../models/Adoption';
 import Attachment from '../models/Attachment';
 
 class AdoptionRepository {
-  async getAll(limit, page) {
+  async getAll(limit, page, filter) {
+    let condition = {};
+    if (filter) {
+      condition = {
+        status: true,
+        [Op.and]: [{ type: filter }],
+      };
+    } else {
+      condition = {
+        status: true,
+      };
+    }
     const response = await Adoption.findAndCountAll({
       attributes: [
         'uid',
@@ -21,12 +33,21 @@ class AdoptionRepository {
           order: [['created_at', 'DESC']],
         },
       ],
+      // where: {
+      //   status: true,
+      //   [Op.and]: [{ type: filter }],
+      // },
+      where: condition,
       limit,
       offset: limit * (page - 1),
     });
     // provisório
     const countAdoptions = await Adoption.findAndCountAll({
       attributes: ['uid'],
+      where: {
+        status: true,
+        [Op.and]: [{ type: filter }],
+      },
       limit,
       offset: limit * (page - 1),
     });

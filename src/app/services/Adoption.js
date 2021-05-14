@@ -2,7 +2,7 @@ import AdoptionRepository from '../repositories/Adoption';
 // import Cache from '../../lib/Cache';
 
 class AdoptionService {
-  async getAll(limit, page) {
+  async getAll(limit, page, filter) {
     // const adoptionsCache = await Cache.get(`adoptions--${page}`);
 
     // if (adoptionsCache !== null) {
@@ -12,7 +12,7 @@ class AdoptionService {
     //   };
     // }
 
-    const data = await AdoptionRepository.getAll(limit, page);
+    const data = await AdoptionRepository.getAll(limit, page, filter);
 
     // await Cache.setExpire(`adoptions--${page}`, JSON.stringify(data), 3600);
 
